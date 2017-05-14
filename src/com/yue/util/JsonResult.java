@@ -11,7 +11,7 @@ public class JsonResult<T> {
 		message="成功";
 	}
 	public JsonResult(Throwable e){
-		code="SystemError";
+		code="ServerError";
 		data=null;
 		message="服务器错误500";
 	}

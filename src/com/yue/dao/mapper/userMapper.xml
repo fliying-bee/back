@@ -3,13 +3,20 @@
     "-//mybatis.org//DTD Mapper 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
  <mapper namespace="com.yue.dao.UserDao">
-    <select id="queryUserByName" resultType="User" parameterType="User">
+ 	<!-- 登录 -->
+    <select id="queryUserByName" resultType="com.yue.model.User" parameterType="com.yue.model.User">
         select * 
-        from beuser 
-        where username = #{username} and password = #{password}
+        from BEUser 
+        where userName = #{userName} and password = #{password}
     </select>
-    <select id="queryAllUser" resultType="User">
-        select *
+    <!-- 注册 -->
+    <insert id="insertUser" parameterType="com.yue.model.User">
+        insert into BEUser(userId,userName,password,userTel,userAddr,userSex) 
+               values(#{userId},#{userName},#{password},#{userTel},#{userAddr},#{userSex})
+    </insert>  
+   	 <!-- 查询所有用户 -->
+    <select id="queryAllUser" resultType="com.yue.model.User">
+        select userId,userName,userTel,userAddr,userSex
         from beuser 
     </select>
     

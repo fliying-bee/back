@@ -1,24 +1,23 @@
 package com.yue.model;
 
 public class User {
-    private String userid;
-    private String username;
+    private String userId;
+    private String userName;
     private String password;
-    private String telephone;
-    private String sex;
-    private String address;
-	
-	public String getUserid() {
-		return userid;
+    private String userTel;
+    private String userSex;
+    private String userAddr;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;
@@ -26,26 +25,22 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getTelephone() {
-		return telephone;
+	public String getUserTel() {
+		return userTel;
 	}
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setUserTel(String userTel) {
+		this.userTel = userTel;
 	}
-	public String getSex() {
-		return sex;
+	public String getUserSex() {
+		return userSex;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setUserSex(String userSex) {
+		this.userSex = userSex;
 	}
-	public String getAddress() {
-		return address;
+	public String getUserAddr() {
+		return userAddr;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setUserAddr(String userAddr) {
+		this.userAddr = userAddr;
 	}
-    
-    
-    
-   
 }

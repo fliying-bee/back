@@ -1,6 +1,5 @@
 package com.yue.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,11 @@ import com.yue.model.User;
 public class UserService {
 	@Autowired
 	private UserDao userdao;
-//    public List<User> findAllUser(){
-//    	return iuser.findAllUser();
-//    }
     public User queryUserByName(User user){
     	return userdao.queryUserByName(user);
+    }
+    public Integer insertUser(User user){
+    	return userdao.insertUser(user);
     }
     public List queryAllUser(){
     	return userdao.queryAllUser();
