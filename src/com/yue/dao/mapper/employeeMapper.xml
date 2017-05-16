@@ -4,10 +4,40 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
  <mapper namespace="com.yue.dao.EmployeeDao">
  	<!-- 登录 -->
-    <select id="queryEmployeeByName" resultType="com.yue.model.Employee" parameterType="com.yue.model.Employee">
-        select * 
-        from BEEmp 
-        where empName = #{empName} and empPassword = #{empPassword}
+    <select id="queryEmployeeByName" resultType="com.yue.model.EmployeeSearch" parameterType="com.yue.model.Employee">
+        select BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel,
+        	wmsys.wm_concat(BDEmpLimit.limId)empLimId,
+        	wmsys.wm_concat(DTLimit.limName)empLimName,
+        	wmsys.wm_concat(DTLimit.limDesc)empLimDesc
+        from BEEmp,BDEmpLimit,DTLimit
+        where empName = #{empName} and empPassword = #{empPassword} 
+        	and BDEmpLimit.empId = BEEmp.empId and BDEmpLimit.limId = DTLimit.limId
+        group by BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel
     </select>
+    <!-- 分页查询所有员工 -->
+    <select id="queryAllEmployeePage" resultType="com.yue.model.EmployeeSearch" >
+        select BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel,
+        	wmsys.wm_concat(BDEmpLimit.limId)empLimId,
+        	wmsys.wm_concat(DTLimit.limName)empLimName,
+        	wmsys.wm_concat(DTLimit.limDesc)empLimDesc
+        from BEEmp,BDEmpLimit,DTLimit
+        where BDEmpLimit.empId = BEEmp.empId and BDEmpLimit.limId = DTLimit.limId
+        group by BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel
+    </select>
+    <!-- 插入 -->
+    <insert id="insertEmployee" parameterType="com.yue.model.Employee">
+        insert into BEEmp(empId,empName,empPassword,empSex,empTel) 
+               values(#{empId},#{empName},#{empPassword},#{empSex},#{empTel})
+    </insert>  
+    <!-- 删除 -->
+    <delete id="deleteEmployee" parameterType="String">
+        delete from BEEmp where empId=#{empId}
+    </delete>
+    <!-- 更新 -->
+    <update id="updateEmployee" parameterType="Employee">
+        update BEEmp set empName=#{empName},empPassword=#{empPassword},
+        	empSex=#{empSex},empTel=#{empTel}
+        where empId=#{empId}
+    </update>
     
  </mapper>

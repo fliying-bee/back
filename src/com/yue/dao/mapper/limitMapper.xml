@@ -9,7 +9,12 @@
         from DTLimit 
         where limId = #{limId}
     </select>
-   	 <!-- 查询所有权限-->
+   	 <!-- 分页查询所有权限-->
+    <select id="queryAllLimitPage" resultType="com.yue.model.Limit">
+        select *
+        from DTLimit 
+    </select>
+    <!-- 查询所有权限-->
     <select id="queryAllLimit" resultType="com.yue.model.Limit">
         select *
         from DTLimit 

@@ -7,12 +7,14 @@ import com.yue.model.Limit;
 public interface LimitDao {
 	//根据ID查
 	public Limit queryLimitById(String limId);
+	//分页查询所有
+	public List<Limit> queryAllLimitPage();
 	//查询所有
-	public List queryAllLimit();
+	public List<Limit> queryAllLimit();
 	//插入
-	public Integer insertLimit(Limit limit);
+	public int insertLimit(Limit limit);
 	//删除
-	public Integer deleteLimit(String limId);
+	public int deleteLimit(String limId);
 	//更新
-	public Integer updateLimit(Limit limit);
+	public int updateLimit(Limit limit);
 }

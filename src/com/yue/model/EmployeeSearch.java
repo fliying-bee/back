@@ -1,12 +1,34 @@
 package com.yue.model;
 
-public class Employee {
+public class EmployeeSearch {
 	private String empId;
 	private String empName;
 	private String empPassword;
 	private String empSex;
 	private String empTel;
+	private String empLimName;
+	private String empLimId;
+	private String empLimDesc;
 	
+	
+	public String getEmpLimName() {
+		return empLimName;
+	}
+	public void setEmpLimName(String empLimName) {
+		this.empLimName = empLimName;
+	}
+	public String getEmpLimId() {
+		return empLimId;
+	}
+	public void setEmpLimId(String empLimId) {
+		this.empLimId = empLimId;
+	}
+	public String getEmpLimDesc() {
+		return empLimDesc;
+	}
+	public void setEmpLimDesc(String empLimDesc) {
+		this.empLimDesc = empLimDesc;
+	}
 	public String getEmpId() {
 		return empId;
 	}

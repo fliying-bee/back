@@ -15,16 +15,19 @@ public class LimitService {
 	public Limit queryLimitById(String limId){
     	return limitDao.queryLimitById(limId);
     }
-	public List queryAllLimit(){
+	public List<Limit> queryAllLimitPage(){
+    	return limitDao.queryAllLimitPage();
+    }
+	public List<Limit> queryAllLimit(){
     	return limitDao.queryAllLimit();
     }
-	public Integer insertLimit(Limit limit){
+	public int insertLimit(Limit limit){
     	return limitDao.insertLimit(limit);
     }
-	public Integer deleteLimit(String limId){
+	public int deleteLimit(String limId){
     	return limitDao.deleteLimit(limId);
     }
-	public Integer updateLimit(Limit limit){
+	public int updateLimit(Limit limit){
     	return limitDao.updateLimit(limit);
     }
 }

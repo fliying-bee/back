@@ -8,7 +8,7 @@ public interface UserDao {
 //	 public List<User> findAllUser();
 	 public User queryUserByName(User user);
 	 public int insertUser(User user);
-	 public List queryAllUser();
+	 public List<User> queryAllUser();
 //	 public int insertUser(User user);
 //	 public int deleteUser(int id);
 //	 public int updateUser(User user);

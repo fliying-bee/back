@@ -15,10 +15,10 @@ public class UserService {
     public User queryUserByName(User user){
     	return userdao.queryUserByName(user);
     }
-    public Integer insertUser(User user){
+    public int insertUser(User user){
     	return userdao.insertUser(user);
     }
-    public List queryAllUser(){
+    public List<User> queryAllUser(){
     	return userdao.queryAllUser();
     }
 //    public int insertUser(User user){
