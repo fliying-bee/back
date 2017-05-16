@@ -9,7 +9,7 @@
                values(#{empId},#{limId})
     </insert>  
     <!-- 删除 -->
-    <delete id="deleteEmpLimit" parameterType="String">
+    <delete id="deleteEmpLimit" parameterType="com.yue.model.EmpLimit">
         delete from BDEmpLimit where empId=#{empId} and limId=#{limId}
     </delete>
     

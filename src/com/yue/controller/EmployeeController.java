@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yue.model.Employee;
 import com.yue.model.EmployeeSearch;
+import com.yue.model.Limit;
 import com.yue.model.Page;
 import com.yue.service.EmployeeService;
 import com.yue.util.JsonResult;
@@ -31,6 +32,24 @@ public class EmployeeController {
 			EmployeeSearch getEmployee = employeeService.queryEmployeeByName(employee);
 			try{
 				getEmployee.setEmpPassword("**********");
+				return new JsonResult<EmployeeSearch>(getEmployee);
+			}catch(Exception e){
+				return new JsonResult<EmployeeSearch>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<EmployeeSearch>(e);
+		}
+		
+	}
+	
+//	根据权限编码查询权限
+	@RequestMapping(value="queryEmployeeById")
+	@ResponseBody
+	public JsonResult<EmployeeSearch> queryEmployeeById(String empId){
+		try{
+			EmployeeSearch getEmployee= employeeService.queryEmployeeById(empId);
+			try{
 				return new JsonResult<EmployeeSearch>(getEmployee);
 			}catch(Exception e){
 				return new JsonResult<EmployeeSearch>(e);
