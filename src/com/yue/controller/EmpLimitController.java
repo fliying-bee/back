@@ -43,10 +43,12 @@ public class EmpLimitController {
 //	删除员工权限
 	@RequestMapping(value="deleteEmpLimit")
 	@ResponseBody
-	public JsonResult<EmpLimit> deleteEmpLimit(String empId){
+	public JsonResult<EmpLimit> deleteEmpLimit(String empId,String limId){
 		EmpLimit empLimit = new EmpLimit();
+		empLimit.setEmpId(empId);
+		empLimit.setLimId(limId);
 		try{
-			int flag= empLimitService.deleteEmpLimit(empId);
+			int flag= empLimitService.deleteEmpLimit(empLimit);
 			if(flag==1){
 				return new JsonResult<EmpLimit>(empLimit);	
 			}else{
