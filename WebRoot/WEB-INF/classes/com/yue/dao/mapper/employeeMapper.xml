@@ -14,6 +14,16 @@
         	and BDEmpLimit.empId = BEEmp.empId and BDEmpLimit.limId = DTLimit.limId
         group by BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel
     </select>
+    <!-- 根据ID查权限 -->
+    <select id="queryEmployeeById" resultType="com.yue.model.EmployeeSearch" parameterType="String">
+        select BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel,
+        	wmsys.wm_concat(BDEmpLimit.limId)empLimId,
+        	wmsys.wm_concat(DTLimit.limName)empLimName,
+        	wmsys.wm_concat(DTLimit.limDesc)empLimDesc
+        from BEEmp,BDEmpLimit,DTLimit
+        where BEEmp.empId = #{empId} and BDEmpLimit.empId = BEEmp.empId and BDEmpLimit.limId = DTLimit.limId
+        group by BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel
+    </select>
     <!-- 分页查询所有员工 -->
     <select id="queryAllEmployeePage" resultType="com.yue.model.EmployeeSearch" >
         select BEEmp.empId,BEEmp.empName,BEEmp.empPassword,BEEmp.empSex,BEEmp.empTel,

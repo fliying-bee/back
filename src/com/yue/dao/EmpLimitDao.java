@@ -6,5 +6,5 @@ public interface EmpLimitDao {
 	//插入
 	public int insertEmpLimit(EmpLimit empLimit);
 	//删除 
-	public int deleteEmpLimit(String empId);
+	public int deleteEmpLimit(EmpLimit empLimit);
 }

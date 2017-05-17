@@ -13,6 +13,11 @@ import com.yue.model.EmployeeSearch;
 public class EmployeeService {
 	@Autowired
 	private EmployeeDao employeedao;
+	
+	//根据Id查询
+	public EmployeeSearch queryEmployeeById(String empId){
+    	return employeedao.queryEmployeeById(empId);
+    }
 	//根据用户名查询
     public EmployeeSearch queryEmployeeByName(Employee employee){
     	return employeedao.queryEmployeeByName(employee);

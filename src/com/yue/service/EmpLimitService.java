@@ -15,7 +15,7 @@ public class EmpLimitService {
     	return empLimitdao.insertEmpLimit(empLimit);
     }
 	//删除 
-	public int deleteEmpLimit(String empId){
-    	return empLimitdao.deleteEmpLimit(empId);
+	public int deleteEmpLimit(EmpLimit empLimit){
+    	return empLimitdao.deleteEmpLimit(empLimit);
     }
 }

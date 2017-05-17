@@ -9,8 +9,8 @@
                values(#{empId},#{limId})
     </insert>  
     <!-- 删除 -->
-    <delete id="deleteEmployee" parameterType="String">
-        delete from BDEmpLimit where empId=#{empId}
+    <delete id="deleteEmpLimit" parameterType="com.yue.model.EmpLimit">
+        delete from BDEmpLimit where empId=#{empId} and limId=#{limId}
     </delete>
     
  </mapper>

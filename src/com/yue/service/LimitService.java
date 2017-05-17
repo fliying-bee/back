@@ -12,6 +12,7 @@ import com.yue.model.Limit;
 public class LimitService {
 	@Autowired
 	private LimitDao limitDao;
+	
 	public Limit queryLimitById(String limId){
     	return limitDao.queryLimitById(limId);
     }
