@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.FactoryDao">
+ 	<!-- 根据ID查权限 -->
+    <select id="queryFactoryById" resultType="com.yue.model.Factory" parameterType="String">
+        select * 
+        from BEFactory 
+        where facId = #{facId}
+    </select>
+   	 <!-- 分页查询所有权限-->
+    <select id="queryAllFactoryPage" resultType="com.yue.model.Factory">
+        select *
+        from BEFactory
+    </select>
+    <!-- 查询所有权限-->
+    <select id="queryAllFactory" resultType="com.yue.model.Factory">
+        select *
+        from BEFactory
+    </select>
+    <!-- 插入 -->
+    <insert id="insertFactory" parameterType="com.yue.model.Factory">
+        insert into BEFactory(facId,facName,facAddr，facTel) 
+               values(#{facId},#{facName},#{facAddr},#{facTel})
+    </insert>  
+    <!-- 删除 -->
+    <delete id="deleteFactory" parameterType="String">
+        delete from BEFactory where facId=#{facId}
+    </delete>
+    <!-- 更新 -->
+    <update id="updateFactory" parameterType="Factory">
+        update BEFactory set facName=#{facName},facAddr=#{facAddr},facTel=#{facTel} where facId=#{facId}
+    </update>
+ </mapper>
