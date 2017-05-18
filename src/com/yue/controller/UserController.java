@@ -1,11 +1,16 @@
 package com.yue.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
+import com.yue.model.Page;
 import com.yue.model.User;
 import com.yue.service.UserService;
 import com.yue.util.JsonResult;
@@ -13,7 +18,6 @@ import com.yue.util.JsonResult;
 @Controller
 public class UserController {
 	@Autowired
-	
 	private UserService userService;
 	User user = new User();
 //	注册
@@ -77,5 +81,53 @@ public class UserController {
 		}
 		
 	}
-
+//	分页查询所有用户
+	@RequestMapping(value="queryAllUserPage")
+	@ResponseBody
+	public JsonResult<Page<User>> queryAllUserPage(int currentPage, int pageSize){
+		try{
+			List<User> getUser= userService.queryAllUserPage();
+			Page<User> page = new Page<User>();
+			page.setCurrentPage(currentPage);
+			page.setPageSize(pageSize);
+			page.setTotalRow(getUser.size());
+			List<User> pageUser = new ArrayList<User>();
+			int start = (page.getCurrentPage()-1)*page.getPageSize();
+			int end = start + page.getPageSize();
+			for(int i=start;i<end;i++){
+				try{
+					pageUser.add(getUser.get(i));
+				}catch(Exception e){
+					
+				}
+			}
+			page.setList(pageUser);
+			try{
+				return new JsonResult<Page<User>>(page);
+			}catch(Exception e){
+				return new JsonResult<Page<User>>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Page<User>>(e);
+		}
+		
+	}
+//	根据用户编码查询用户
+	@RequestMapping(value="queryUserById")
+	@ResponseBody
+	public JsonResult<User> queryUserById(String userId){
+		try{
+			User getUser= userService.queryUserById(userId);
+			try{
+				return new JsonResult<User>(getUser);
+			}catch(Exception e){
+				return new JsonResult<User>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<User>(e);
+		}
+		
+	}
 }

@@ -21,6 +21,12 @@ public class UserService {
     public List<User> queryAllUser(){
     	return userdao.queryAllUser();
     }
+    public List<User> queryAllUserPage(){
+    	return userdao.queryAllUserPage();
+    }
+    public User queryUserById(String userId){
+    	return userdao.queryUserById(userId);
+    }
 //    public int insertUser(User user){
 //    	return iuser.insertUser(user);
 //    }
