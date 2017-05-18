@@ -17,7 +17,16 @@
    	 <!-- 查询所有用户 -->
     <select id="queryAllUser" resultType="com.yue.model.User">
         select userId,userName,userTel,userAddr,userSex
-        from beuser 
+        from BEUser 
     </select>
-    
+    <!--根据ID搜索 -->
+    <select id="queryUserById" resultType="com.yue.model.User" parameterType="com.yue.model.User">
+        select * 
+        from BEUser 
+        where userId = #{userId}
+    </select>
+    <select id="queryAllUserPage" resultType="com.yue.model.User">
+        select *
+        from BEUser 
+    </select>
  </mapper>

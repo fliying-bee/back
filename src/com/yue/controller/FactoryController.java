@@ -19,7 +19,7 @@ public class FactoryController {
 	private FactoryService factoryService;
 	
 	
-//	分页查询所有权限
+//	分页查询所有厂家
 	@RequestMapping(value="queryAllFactoryPage")
 	@ResponseBody
 	public JsonResult<Page<Factory>> queryAllFactoryPage(int currentPage, int pageSize){
@@ -51,7 +51,7 @@ public class FactoryController {
 		}
 		
 	}
-//	查询所有权限
+//	查询所有厂家
 	@RequestMapping(value="queryAllFactory")
 	@ResponseBody
 	public JsonResult<List<Factory>> queryAllFactory(){
@@ -69,7 +69,7 @@ public class FactoryController {
 		}
 		
 	}
-//	根据权限编码查询权限
+//	根据厂家编码查询厂家
 	@RequestMapping(value="queryFactoryById")
 	@ResponseBody
 	public JsonResult<Factory> queryFactoryById(String facId){
@@ -87,7 +87,7 @@ public class FactoryController {
 		
 	}
 	
-//	插入权限
+//	插入厂家
 	@RequestMapping(value="insertFactory")
 	@ResponseBody
 	public JsonResult<Factory> insertFactory(String facId,String facName,String facAddr,String facTel){
@@ -114,7 +114,7 @@ public class FactoryController {
 		}
 		
 	}
-//	删除权限
+//	删除厂家
 	@RequestMapping(value="deleteFactory")
 	@ResponseBody
 	public JsonResult<Factory> deleteFactory(String facId){
@@ -136,7 +136,7 @@ public class FactoryController {
 		}
 		
 	}
-//	修改权限
+//	修改厂家
 	@RequestMapping(value="updateFactory")
 	@ResponseBody
 	public JsonResult<Factory> updateFactory(String facId, String facName, String facAddr, String facTel){
