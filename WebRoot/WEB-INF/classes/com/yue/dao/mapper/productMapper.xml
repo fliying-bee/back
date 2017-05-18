@@ -3,12 +3,17 @@
     "-//mybatis.org//DTD Mapper 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
  <mapper namespace="com.yue.dao.ProductDao">
-    <!-- 分页查询所有员工 -->
+    <!-- 分页查询所有商品 -->
     <select id="queryProductPageByType" resultType="com.yue.model.Product" parameterType="String">
         select *
         from BEProduct
         where proType = #{proType}
     </select>
     
-    
+    <!-- 根据ID查商品 -->
+    <select id="queryProductById" resultType="com.yue.model.Product" parameterType="String">
+        select * 
+        from BEProduct 
+        where proId = #{proId}
+    </select>
  </mapper>
