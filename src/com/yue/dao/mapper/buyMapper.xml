@@ -4,15 +4,73 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
  <mapper namespace="com.yue.dao.BuyDao">
  	<!-- 根据ID查购买单 -->
-    <select id="queryBuyById" resultType="com.yue.model.Buy" parameterType="String">
-        select * 
-        from BDBuy 
-        where buyId = #{buyId}
-    </select>
+ 	<resultMap id="queryForListMap" type="com.yue.model.BuyOrder"> 
+ 		<id column="buyId" property="buyId" jdbcType="VARCHAR"/> 
+        <result column="buyOrderTime" property="buyOrderTime" jdbcType="DATE"/>  
+        <result column="buyStatus" property="buyStatus" jdbcType="VARCHAR"/>  
+        <result column="logisStatus" property="logisStatus" jdbcType="VARCHAR"/>  
+        <result column="buyPriceSum" property="buyPriceSum" jdbcType="FLOAT"/>  
+        <result column="userId" property="userId" jdbcType="VARCHAR"/> 
+        <result column="buyAddr" property="buyAddr" jdbcType="VARCHAR"/>  
+        <collection property="buyDetail" javaType="java.util.List" ofType="com.yue.model.BuyDetail"> 
+            <id column="buyId" property="buyId" jdbcType="VARCHAR" /> 
+            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+            <result column="proId" property="proId" jdbcType="VARCHAR" />  
+            <result column="buyDetailType" property="buyDetailType" jdbcType="VARCHAR" />  
+            <result column="buyDetailCount" property="buyDetailCount" jdbcType="INTEGER" />
+            <collection property="product" javaType="com.yue.model.Product" ofType="com.yue.model.Product"> 
+	            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+	            <result column="proName" property="proName" jdbcType="VARCHAR" />  
+	            <result column="proBuyPrice" property="proBuyPrice" jdbcType="VARCHAR" />  
+	            <result column="proSalePrice" property="proSalePrice" jdbcType="FLOAT" />
+	        	<result column="proPicPath" property="proPicPath" jdbcType="VARCHAR" />	 
+	        	<result column="proSellPrice" property="proSellPrice" jdbcType="FLOAT" />	     
+	        </collection>
+        </collection>  
+    </resultMap>  
+    <select id="queryBuyById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.buyId,  
+          u.buyOrderTime,  
+          u.buyStatus,
+          u.logisStatus, 
+          u.buyAddr, 
+          u.buyPriceSum, 
+          u.userId, 
+          r.proId,  
+          r.buyDetailType,  
+          r.buyDetailCount,
+          b.proName,
+          b.proBuyPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDBuy u  
+        JOIN BDBuyDetail r on (u.buyId = r.buyId and u.buyId=#{buyId})
+        JOIN BEProduct b on r.proId = b.proId 
+    </select>  
+ 	
    	 <!-- 分页查询所有购买单-->
-    <select id="queryAllBuyPage" resultType="com.yue.model.Buy">
-        select *
-        from BDBuy 
+    <select id="queryAllBuyPage" resultMap="queryForListMap">
+        SELECT  
+          u.buyId,  
+          u.buyOrderTime,  
+          u.buyStatus,
+          u.logisStatus, 
+          u.buyAddr, 
+          u.buyPriceSum, 
+          u.userId, 
+          r.proId,  
+          r.buyDetailType,  
+          r.buyDetailCount,
+          b.proName,
+          b.proBuyPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDBuy u  
+        JOIN BDBuyDetail r on u.buyId = r.buyId
+        JOIN BEProduct b on r.proId = b.proId
     </select>
    
     <!-- 插入 -->

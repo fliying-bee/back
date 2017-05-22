@@ -7,16 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.yue.dao.BuyDao;
 import com.yue.model.Buy;
+import com.yue.model.BuyOrder;
 
 @Service
 public class BuyService {
 	@Autowired
 	private BuyDao BuyDao;
 	
-	public Buy queryBuyById(String buyId){
+	public BuyOrder queryBuyById(String buyId){
     	return BuyDao.queryBuyById(buyId);
     }
-	public List<Buy> queryAllBuyPage(){
+	public List<BuyOrder> queryAllBuyPage(){
     	return BuyDao.queryAllBuyPage();
     }
 	public int insertBuy(Buy buy){

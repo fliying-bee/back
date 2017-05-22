@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yue.model.Buy;
+import com.yue.model.BuyOrder;
 import com.yue.model.Page;
 import com.yue.service.BuyService;
 import com.yue.util.JsonResult;
@@ -25,14 +26,14 @@ public class BuyController {
 //	分页查询所有购买单
 	@RequestMapping(value="queryAllBuyPage")
 	@ResponseBody
-	public JsonResult<Page<Buy>> queryAllBuyPage(int currentPage, int pageSize){
+	public JsonResult<Page<BuyOrder>> queryAllBuyPage(int currentPage, int pageSize){
 		try{
-			List<Buy> getBuy= BuyService.queryAllBuyPage();
-			Page<Buy> page = new Page<Buy>();
+			List<BuyOrder> getBuy= BuyService.queryAllBuyPage();
+			Page<BuyOrder> page = new Page<BuyOrder>();
 			page.setCurrentPage(currentPage);
 			page.setPageSize(pageSize);
 			page.setTotalRow(getBuy.size());
-			List<Buy> pageBuy = new ArrayList<Buy>();
+			List<BuyOrder> pageBuy = new ArrayList<BuyOrder>();
 			int start = (page.getCurrentPage()-1)*page.getPageSize();
 			int end = start + page.getPageSize();
 			for(int i=start;i<end;i++){
@@ -44,13 +45,13 @@ public class BuyController {
 			}
 			page.setList(pageBuy);
 			try{
-				return new JsonResult<Page<Buy>>(page);
+				return new JsonResult<Page<BuyOrder>>(page);
 			}catch(Exception e){
-				return new JsonResult<Page<Buy>>(e);
+				return new JsonResult<Page<BuyOrder>>(e);
 			}		
 		}catch(Exception e){
 			e.printStackTrace();
-			return new JsonResult<Page<Buy>>(e);
+			return new JsonResult<Page<BuyOrder>>(e);
 		}
 		
 	}
@@ -58,17 +59,17 @@ public class BuyController {
 //	根据购买单编码查询购买单
 	@RequestMapping(value="queryBuyById")
 	@ResponseBody
-	public JsonResult<Buy> queryBuyById(String limId){
+	public JsonResult<BuyOrder> queryBuyById(String buyId){
 		try{
-			Buy getBuy= BuyService.queryBuyById(limId);
+			BuyOrder getBuy= BuyService.queryBuyById(buyId);
 			try{
-				return new JsonResult<Buy>(getBuy);
+				return new JsonResult<BuyOrder>(getBuy);
 			}catch(Exception e){
-				return new JsonResult<Buy>(e);
+				return new JsonResult<BuyOrder>(e);
 			}		
 		}catch(Exception e){
 			e.printStackTrace();
-			return new JsonResult<Buy>(e);
+			return new JsonResult<BuyOrder>(e);
 		}
 		
 	}

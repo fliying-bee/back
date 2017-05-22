@@ -5,6 +5,13 @@ public class BuyDetail {
 	private String proId;
 	private String buyDetailType;
 	private int buyDetailCount;
+	private Product product;
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 	public String getBuyId() {
 		return buyId;
 	}
