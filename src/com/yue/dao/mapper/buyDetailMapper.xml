@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.BuyDetailDao">
+    <!-- 插入 -->
+    <insert id="insertBuyDetail" parameterType="com.yue.model.BuyDetail">
+        insert into BDBuyDetail(proId,buyId,buyDetailCount,buyDetailType) 
+               values(#{proId},#{buyId},#{buyDetailCount},#{buyDetailType})
+    </insert>  
+    <!-- 删除 -->
+    <delete id="deleteBuyDetail" parameterType="String">
+        delete from BDBuyDetail where proId=#{proId} and buyId=#{buyId}
+    </delete>
+    <!-- 更新 -->
+    <update id="updateBuyDetail" parameterType="BuyDetail">
+        update BDBuyDetail set buyDetailCount=#{buyDetailCount},buyDetailType=#{buyDetailType} where proId=#{proId} and buyId=#{buyId}
+    </update>
+ </mapper>

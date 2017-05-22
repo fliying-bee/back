@@ -14,11 +14,11 @@ public class BuyService {
 	@Autowired
 	private BuyDao BuyDao;
 	
-	public BuyOrder queryBuyById(String buyId){
-    	return BuyDao.queryBuyById(buyId);
+	public BuyOrder queryBuyById(String buyId,String userId){
+    	return BuyDao.queryBuyById(buyId,userId);
     }
-	public List<BuyOrder> queryAllBuyPage(){
-    	return BuyDao.queryAllBuyPage();
+	public List<BuyOrder> queryAllBuyPage(String userId){
+    	return BuyDao.queryAllBuyPage(userId);
     }
 	public int insertBuy(Buy buy){
     	return BuyDao.insertBuy(buy);

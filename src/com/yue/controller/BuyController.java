@@ -23,12 +23,12 @@ public class BuyController {
 	private BuyService BuyService;
 	
 	
-//	分页查询所有购买单
+//	分页查询用户的所有购买单
 	@RequestMapping(value="queryAllBuyPage")
 	@ResponseBody
-	public JsonResult<Page<BuyOrder>> queryAllBuyPage(int currentPage, int pageSize){
+	public JsonResult<Page<BuyOrder>> queryAllBuyPage(int currentPage, int pageSize, String userId){
 		try{
-			List<BuyOrder> getBuy= BuyService.queryAllBuyPage();
+			List<BuyOrder> getBuy= BuyService.queryAllBuyPage(userId);
 			Page<BuyOrder> page = new Page<BuyOrder>();
 			page.setCurrentPage(currentPage);
 			page.setPageSize(pageSize);
@@ -56,12 +56,12 @@ public class BuyController {
 		
 	}
 
-//	根据购买单编码查询购买单
+//	根据购买单编码与用户查询购买单
 	@RequestMapping(value="queryBuyById")
 	@ResponseBody
-	public JsonResult<BuyOrder> queryBuyById(String buyId){
+	public JsonResult<BuyOrder> queryBuyById(String buyId, String userId){
 		try{
-			BuyOrder getBuy= BuyService.queryBuyById(buyId);
+			BuyOrder getBuy= BuyService.queryBuyById(buyId,userId);
 			try{
 				return new JsonResult<BuyOrder>(getBuy);
 			}catch(Exception e){

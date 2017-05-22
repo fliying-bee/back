@@ -7,9 +7,9 @@ import com.yue.model.BuyOrder;
 
 public interface BuyDao {
 	//根据ID查
-	public BuyOrder queryBuyById(String buyId);
+	public BuyOrder queryBuyById(String buyId,String userId);
 	//分页查询所有
-	public List<BuyOrder> queryAllBuyPage();
+	public List<BuyOrder> queryAllBuyPage(String userId);
 	//插入
 	public int insertBuy(Buy buy);
 	//更新

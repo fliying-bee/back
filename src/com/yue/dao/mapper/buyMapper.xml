@@ -46,7 +46,7 @@
           b.proPicPath
         FROM  
           BDBuy u  
-        JOIN BDBuyDetail r on (u.buyId = r.buyId and u.buyId=#{buyId})
+        JOIN BDBuyDetail r on (u.buyId = r.buyId and u.buyId=#{buyId} and u.userId=#{userId})
         JOIN BEProduct b on r.proId = b.proId 
     </select>  
  	
@@ -69,7 +69,7 @@
           b.proPicPath
         FROM  
           BDBuy u  
-        JOIN BDBuyDetail r on u.buyId = r.buyId
+        JOIN BDBuyDetail r on (u.buyId = r.buyId and u.userId=#{userId})
         JOIN BEProduct b on r.proId = b.proId
     </select>
    
@@ -81,10 +81,14 @@
     
     <!-- 更新付款状态 -->
     <update id="updateBuyStatus" parameterType="Buy">
-        update BDBuy set buyStatus=#{buyStatus} where buyId=#{buyId}
+        update BDBuy 
+        set buyStatus=#{buyStatus} 
+        where buyId=#{buyId}
     </update>
     <!-- 更新物流状态 -->
     <update id="updateBuyLogisStatus" parameterType="Buy">
-        update BDBuy set logisStatus=#{logisStatus} where buyId=#{buyId}
+        update BDBuy 
+        set logisStatus=#{logisStatus} 
+        where buyId=#{buyId}
     </update>
  </mapper>
