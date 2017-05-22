@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yue.model.ProductDetail;
+import com.yue.model.ProductDetail;
 import com.yue.service.ProductDetailService;
 import com.yue.util.JsonResult;
 
@@ -33,5 +34,29 @@ public class ProductDetailController {
 		}
 		
 	}
+//	修改权限
+//	@RequestMapping(value="updateProductDetail")
+//	@ResponseBody
+//	public JsonResult<ProductDetail> updateProductDetail(String proDetailId, int proDetailCount,String proDetailType,String proId){
+//		ProductDetail ProductDetail = new ProductDetail();
+//		ProductDetail.setProDetailCount(proDetailCount);
+//		ProductDetail.setProDetailType(proDetailType);
+//		ProductDetail.setProDetailId(proDetailId);
+//		ProductDetail.setProId(proId);
+//		try{
+//			int flag= ProductDetailService.updateProductDetail(ProductDetail);
+//			if(flag==1){
+//				return new JsonResult<ProductDetail>(ProductDetail);	
+//			}else{
+//				ProductDetail error = new ProductDetail();
+//				JsonResult<ProductDetail> result = new JsonResult<ProductDetail>(error);
+//				result.setCode("Error");
+//				return result;
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			return new JsonResult<ProductDetail>(e);
+//		}
+//	}
 
 }
