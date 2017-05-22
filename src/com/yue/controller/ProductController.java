@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yue.model.Product;
 import com.yue.model.Page;
-import com.yue.model.Product;
 import com.yue.service.ProductService;
 import com.yue.util.JsonResult;
 
