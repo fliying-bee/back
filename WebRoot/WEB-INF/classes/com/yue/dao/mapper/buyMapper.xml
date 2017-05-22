@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.BuyDao">
+ 	<!-- 根据ID查购买单 -->
+    <select id="queryBuyById" resultType="com.yue.model.Buy" parameterType="String">
+        select * 
+        from BDBuy 
+        where buyId = #{buyId}
+    </select>
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryAllBuyPage" resultType="com.yue.model.Buy">
+        select *
+        from BDBuy 
+    </select>
+   
+    <!-- 插入 -->
+    <insert id="insertBuy" parameterType="com.yue.model.Buy">
+        insert into BDBuy(buyId,buyPriceSum,userId,buyOrderTime,buyStatus,logisStatus,buyAddr) 
+               values(#{buyId},#{buyPriceSum},#{userId},#{buyOrderTime},#{buyStatus},#{logisStatus},#{buyAddr})
+    </insert>  
+    
+    <!-- 更新付款状态 -->
+    <update id="updateBuyStatus" parameterType="Buy">
+        update BDBuy set buyStatus=#{buyStatus} where buyId=#{buyId}
+    </update>
+    <!-- 更新物流状态 -->
+    <update id="updateBuyLogisStatus" parameterType="Buy">
+        update BDBuy set logisStatus=#{logisStatus} where buyId=#{buyId}
+    </update>
+ </mapper>

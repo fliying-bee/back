@@ -7,7 +7,7 @@ public class Buy {
 	private Date buyOrderTime;
 	private String buyStatus;
 	private String logisStatus;
-	private int buyPriceSum;
+	private float buyPriceSum;
 	private String userId;
 	private String buyAddr;
 	public String getBuyAddr() {
@@ -40,10 +40,10 @@ public class Buy {
 	public void setLogisStatus(String logisStatus) {
 		this.logisStatus = logisStatus;
 	}
-	public int getBuyPriceSum() {
+	public float getBuyPriceSum() {
 		return buyPriceSum;
 	}
-	public void setBuyPriceSum(int buyPriceSum) {
+	public void setBuyPriceSum(float buyPriceSum) {
 		this.buyPriceSum = buyPriceSum;
 	}
 	public String getUserId() {
