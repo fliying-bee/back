@@ -27,7 +27,7 @@ public class ProductDetailService {
     	return productDetailDao.deleteProductDetail(proDetailId);
     }
   	//更新
-  	public int updateProduct(ProductDetail productDetail){
+  	public int updateProductDetail(ProductDetail productDetail){
     	return productDetailDao.updateProductDetail(productDetail);
     }
    

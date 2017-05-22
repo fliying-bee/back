@@ -12,5 +12,5 @@ public interface ProductDetailDao {
 	//删除
 	public int deleteProductDetail(String proDetailId);
 	//更新
-	public int updateProductDetail(ProductDetail productDetai);
+	public int updateProductDetail(ProductDetail productDetail);
 }
