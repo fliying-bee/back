@@ -9,6 +9,13 @@ public class Buy {
 	private String logisStatus;
 	private int buyPriceSum;
 	private String userId;
+	private String buyAddr;
+	public String getBuyAddr() {
+		return buyAddr;
+	}
+	public void setBuyAddr(String buyAddr) {
+		this.buyAddr = buyAddr;
+	}
 	public String getBuyId() {
 		return buyId;
 	}
