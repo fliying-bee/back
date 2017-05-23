@@ -33,15 +33,62 @@ public class ProductDetailController {
 		}
 		
 	}
-//	修改权限
+//	插入权限
+	@RequestMapping(value="insertProductDetail")
+	@ResponseBody
+	public JsonResult<ProductDetail> insertProductDetail(String proDetailId, int proDetailCount,String proDetailType,String proId){
+		ProductDetail productDetail = new ProductDetail();
+		productDetail.setProDetailCount(proDetailCount);
+		productDetail.setProDetailId(proDetailId);
+		productDetail.setProDetailType(proDetailType);
+		productDetail.setProId(proId);
+		try{
+			int flag= productDetailService.insertProductDetail(productDetail);
+			if(flag==1){
+				return new JsonResult<ProductDetail>(productDetail);	
+			}else{
+				ProductDetail error = new ProductDetail();
+				JsonResult<ProductDetail> result = new JsonResult<ProductDetail>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<ProductDetail>(e);
+		}
+		
+	}
+//	删除权限
+	@RequestMapping(value="deleteProductDetail")
+	@ResponseBody
+	public JsonResult<ProductDetail> deleteProductDetail(String proDetailId){
+		ProductDetail ProductDetail = new ProductDetail();
+		try{
+			int flag= productDetailService.deleteProductDetail(proDetailId);
+			if(flag==1){
+				return new JsonResult<ProductDetail>(ProductDetail);	
+			}else{
+				ProductDetail error = new ProductDetail();
+				JsonResult<ProductDetail> result = new JsonResult<ProductDetail>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<ProductDetail>(e);
+		}
+		
+	}
+//	修改商品明细
 	@RequestMapping(value="updateProductDetail")
 	@ResponseBody
-	public JsonResult<ProductDetail> updateProductDetail(String proDetailId, int proDetailCount,String proDetailType,String proId){
+	public JsonResult<ProductDetail> updateProductDetail(String proDetailId, int proDetailCount,String proDetailType){
 		ProductDetail productDetail = new ProductDetail();
 		productDetail.setProDetailCount(proDetailCount);
 		productDetail.setProDetailType(proDetailType);
 		productDetail.setProDetailId(proDetailId);
-		productDetail.setProId(proId);
 		try{
 			int flag= productDetailService.updateProductDetail(productDetail);
 			if(flag==1){

@@ -9,4 +9,19 @@
         from BDProductDetail 
         where proId = #{proId}
     </select>
+    <!-- 插入 -->
+    <insert id="insertProductDetail" parameterType="com.yue.model.ProductDetail">
+        insert into BDProductDetail(proDetailId,proDetailCount,proDetailType,proId) 
+               values(#{proDetailId},#{proDetailCount},#{proDetailType},#{proId})
+    </insert>  
+    <!-- 删除 -->
+    <delete id="deleteProductDetail" parameterType="String">
+        delete from BDProductDetail where proDetailId=#{proDetailId}
+    </delete>
+    <!-- 更新 -->
+    <update id="updateProductDetail" parameterType="ProductDetail">
+        update BDProductDetail 
+        set proDetailCount=#{proDetailCount},proDetailType=#{proDetailType} 
+        where proDetailId=#{proDetailId}
+    </update>
  </mapper>
