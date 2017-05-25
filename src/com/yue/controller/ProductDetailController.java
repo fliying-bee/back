@@ -104,5 +104,35 @@ public class ProductDetailController {
 			return new JsonResult<ProductDetail>(e);
 		}
 	}
+//	修改商品库存
+	@RequestMapping(value="updateProductDetailCount")
+	@ResponseBody
+	public JsonResult<ProductDetail> updateProductDetailCount(String proDetailId, int proDetailCount,String proDetailType){
+		ProductDetail productDetail = new ProductDetail();
+		productDetail.setProDetailId(proDetailId);
+		productDetail.setProDetailType(proDetailType);
+		try{
+			ProductDetail proDetail = productDetailService.queryProductDetailByProDetailId(proDetailId);
+			int oldCount = proDetail.getProDetailCount();
+			productDetail.setProDetailCount(oldCount-proDetailCount);
+			try{
+				int flag= productDetailService.updateProductDetail(productDetail);
+				if(flag==1){
+					return new JsonResult<ProductDetail>(productDetail);	
+				}else{
+					ProductDetail error = new ProductDetail();
+					JsonResult<ProductDetail> result = new JsonResult<ProductDetail>(error);
+					result.setCode("Error");
+					return result;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				return new JsonResult<ProductDetail>(e);
+			}
+		}catch(Exception e){
+			return new JsonResult<ProductDetail>(e);
+		}
+		
+	}
 
 }

@@ -9,6 +9,12 @@
         from BDProductDetail 
         where proId = #{proId}
     </select>
+    <!-- 根据商品明细ID查商品明细 -->
+    <select id="queryProductDetailByProDetailId" resultType="com.yue.model.ProductDetail" parameterType="String">
+        select * 
+        from BDProductDetail 
+        where proDetailId = #{proDetailId}
+    </select>
     <!-- 插入 -->
     <insert id="insertProductDetail" parameterType="com.yue.model.ProductDetail">
         insert into BDProductDetail(proDetailId,proDetailCount,proDetailType,proId) 
