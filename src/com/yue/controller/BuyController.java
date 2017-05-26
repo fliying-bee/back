@@ -144,12 +144,9 @@ public class BuyController {
 		Buy buy = new Buy();
 		buy.setBuyId(buyId);
 		buy.setLogisStatus(logisStatus);
-		System.out.print(buyId+"+++===+++"+logisStatus);
 		try{
 			
 			int flag= BuyService.updateBuyLogisStatus(buy);
-			
-//			return new JsonResult<Buy>(buy);
 			if(flag==1){
 				return new JsonResult<Buy>(buy);	
 			}else{

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Rent {
 	private String rentId;	      /*租赁单编码*/ 
 	private Date rentOrderTime;   /*租赁日期*/ 
-	private Date rentTime;        /*租赁时间  上限7天*/ 
+	private int rentTime;        /*租赁时间  上限7天*/ 
 	private String rentStatus;    /*租赁单状态   已付款  未付款*/
 	private String logisStatus;   /*物流状态 商家未发货 商家已发货 用户已收货 用户已发货 商家已收货*/
 	private Float pledge;         /*租赁单押金  商品售价*50%*/
@@ -25,10 +25,10 @@ public class Rent {
 	public void setRentOrderTime(Date rentOrderTime) {
 		this.rentOrderTime = rentOrderTime;
 	}
-	public Date getRentTime() {
+	public int getRentTime() {
 		return rentTime;
 	}
-	public void setRentTime(Date rentTime) {
+	public void setRentTime(int rentTime) {
 		this.rentTime = rentTime;
 	}
 	public String getRentStatus() {
