@@ -27,6 +27,13 @@ public class BuyService {
     	return BuyDao.updateBuyStatus(buy);
     }
 	public int updateBuyLogisStatus(Buy buy){
-    	return BuyDao.updateBuyStatus(buy);
+//		System.out.print(buyId+"+++!!!!!!!!++"+logisStatus);
+    	return BuyDao.updateBuyLogisStatus(buy);
+    }
+	public BuyOrder queryBackBuyById(String buyId){
+    	return BuyDao.queryBackBuyById(buyId);
+    }
+	public List<BuyOrder> queryBackAllBuyPage(){
+    	return BuyDao.queryBackAllBuyPage();
     }
 }

@@ -92,4 +92,48 @@
         set logisStatus=#{logisStatus} 
         where buyId=#{buyId}
     </update>
+    <select id="queryBackBuyById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.buyId,  
+          u.buyOrderTime,  
+          u.buyStatus,
+          u.logisStatus, 
+          u.buyAddr, 
+          u.buyPriceSum, 
+          u.userId, 
+          r.proId,  
+          r.buyDetailType,  
+          r.buyDetailCount,
+          b.proName,
+          b.proBuyPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDBuy u  
+        JOIN BDBuyDetail r on (u.buyId = r.buyId and u.buyId=#{buyId})
+        JOIN BEProduct b on r.proId = b.proId 
+    </select>  
+ 	
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryBackAllBuyPage" resultMap="queryForListMap">
+        SELECT  
+          u.buyId,  
+          u.buyOrderTime,  
+          u.buyStatus,
+          u.logisStatus, 
+          u.buyAddr, 
+          u.buyPriceSum, 
+          u.userId, 
+          r.proId,  
+          r.buyDetailType,  
+          r.buyDetailCount,
+          b.proName,
+          b.proBuyPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDBuy u  
+        JOIN BDBuyDetail r on u.buyId = r.buyId
+        JOIN BEProduct b on r.proId = b.proId
+    </select>
  </mapper>
