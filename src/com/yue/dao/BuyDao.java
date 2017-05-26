@@ -16,4 +16,8 @@ public interface BuyDao {
 	public int updateBuyStatus(Buy buy);
 	//更新
 	public int updateBuyLogisStatus(Buy buy);
+	//根据ID查
+	public BuyOrder queryBackBuyById(String buyId);
+	//分页查询所有
+	public List<BuyOrder> queryBackAllBuyPage();
 }

@@ -140,12 +140,16 @@ public class BuyController {
 //	修改购买单发货状态
 	@RequestMapping(value="updateBuyLogisStatus")
 	@ResponseBody
-	public JsonResult<Buy> updateBuyLogisStatus(String buyId, String logisStatus){
+	public JsonResult<Buy> updateBuyLogisStatus(String buyId,String logisStatus){
 		Buy buy = new Buy();
 		buy.setBuyId(buyId);
 		buy.setLogisStatus(logisStatus);
+		System.out.print(buyId+"+++===+++"+logisStatus);
 		try{
+			
 			int flag= BuyService.updateBuyLogisStatus(buy);
+			
+//			return new JsonResult<Buy>(buy);
 			if(flag==1){
 				return new JsonResult<Buy>(buy);	
 			}else{
@@ -159,4 +163,57 @@ public class BuyController {
 			return new JsonResult<Buy>(e);
 		}
 	}
+	
+	//后台分页查询所有购买单
+	@RequestMapping(value="queryBackAllBuyPage")
+	@ResponseBody
+	public JsonResult<Page<BuyOrder>> queryBackAllBuyPage(int currentPage, int pageSize){
+		try{
+			List<BuyOrder> getBuy= BuyService.queryBackAllBuyPage();
+			Page<BuyOrder> page = new Page<BuyOrder>();
+			page.setCurrentPage(currentPage);
+			page.setPageSize(pageSize);
+			page.setTotalRow(getBuy.size());
+			List<BuyOrder> pageBuy = new ArrayList<BuyOrder>();
+			int start = (page.getCurrentPage()-1)*page.getPageSize();
+			int end = start + page.getPageSize();
+			for(int i=start;i<end;i++){
+				try{
+					pageBuy.add(getBuy.get(i));
+				}catch(Exception e){
+					
+				}
+			}
+			page.setList(pageBuy);
+			try{
+				return new JsonResult<Page<BuyOrder>>(page);
+			}catch(Exception e){
+				return new JsonResult<Page<BuyOrder>>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Page<BuyOrder>>(e);
+		}
+		
+	}
+//	后台根据购买单编码查询购买单
+	@RequestMapping(value="queryBackBuyById")
+	@ResponseBody
+	public JsonResult<BuyOrder> queryBackBuyById(String buyId){
+		try{
+			BuyOrder getBuy= BuyService.queryBackBuyById(buyId);
+			try{
+				return new JsonResult<BuyOrder>(getBuy);
+			}catch(Exception e){
+				return new JsonResult<BuyOrder>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<BuyOrder>(e);
+		}
+		
+	}
 }
+
+
+
