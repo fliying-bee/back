@@ -18,6 +18,10 @@ public class ProductDetailService {
 	public List<ProductDetail> queryProductDetailByProId(String proId){
     	return productDetailDao.queryProductDetailByProId(proId);
     }
+	//根据proDetailId查询
+		public ProductDetail queryProductDetailByProDetailId(String proDetailId){
+	    	return productDetailDao.queryProductDetailByProDetailId(proDetailId);
+	    }
     //插入
     public int insertProductDetail(ProductDetail productDetail){
     	return productDetailDao.insertProductDetail(productDetail);
