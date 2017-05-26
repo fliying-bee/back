@@ -5,15 +5,18 @@
  <mapper namespace="com.yue.dao.BuyDetailDao">
     <!-- 插入 -->
     <insert id="insertBuyDetail" parameterType="com.yue.model.BuyDetail">
-        insert into BDBuyDetail(proId,buyId,buyDetailCount,buyDetailType) 
-               values(#{proId},#{buyId},#{buyDetailCount},#{buyDetailType})
+        insert into BDBuyDetail(proId,buyId,proDetailId,buyDetailCount,buyDetailType) 
+               values(#{proId},#{buyId},#{proDetailId},#{buyDetailCount},#{buyDetailType})
     </insert>  
     <!-- 删除 -->
     <delete id="deleteBuyDetail" parameterType="String">
-        delete from BDBuyDetail where proId=#{proId} and buyId=#{buyId}
+        delete from BDBuyDetail 
+        where buyId=#{buyId} and proDetailId=#{proDetailId}
     </delete>
     <!-- 更新 -->
     <update id="updateBuyDetail" parameterType="BuyDetail">
-        update BDBuyDetail set buyDetailCount=#{buyDetailCount},buyDetailType=#{buyDetailType} where proId=#{proId} and buyId=#{buyId}
+        update BDBuyDetail 
+        set proId=#{proId} and buyDetailCount=#{buyDetailCount},buyDetailType=#{buyDetailType} 
+        where proDetailId=#{proDetailId} and buyId=#{buyId}
     </update>
  </mapper>

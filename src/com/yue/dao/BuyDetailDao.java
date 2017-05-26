@@ -8,5 +8,5 @@ public interface BuyDetailDao {
 	//更新
 	public int updateBuyDetail(BuyDetail buyDetail);
 	//删除
-	public int deleteBuyDetail(String buyId, String proId);
+	public int deleteBuyDetail(BuyDetail buyDetail);
 }

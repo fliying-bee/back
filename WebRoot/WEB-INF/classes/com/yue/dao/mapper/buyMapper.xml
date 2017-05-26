@@ -14,7 +14,8 @@
         <result column="buyAddr" property="buyAddr" jdbcType="VARCHAR"/>  
         <collection property="buyDetail" javaType="java.util.List" ofType="com.yue.model.BuyDetail"> 
             <id column="buyId" property="buyId" jdbcType="VARCHAR" /> 
-            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+            <id column="proDetailId" property="proDetailId" jdbcType="VARCHAR" /> 
+            <result column="proDetailId" property="proDetailId" jdbcType="VARCHAR" />  
             <result column="proId" property="proId" jdbcType="VARCHAR" />  
             <result column="buyDetailType" property="buyDetailType" jdbcType="VARCHAR" />  
             <result column="buyDetailCount" property="buyDetailCount" jdbcType="INTEGER" />

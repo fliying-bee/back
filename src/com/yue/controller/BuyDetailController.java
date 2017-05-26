@@ -17,10 +17,11 @@ public class BuyDetailController {
 //	插入权限
 	@RequestMapping(value="insertBuyDetail")
 	@ResponseBody
-	public JsonResult<BuyDetail> insertBuyDetail(String buyId, String proId,int buyDetailCount,String buyDetailType){
+	public JsonResult<BuyDetail> insertBuyDetail(String proId, String buyId, String proDetailId,int buyDetailCount,String buyDetailType){
 		BuyDetail buyDetail = new BuyDetail();
 		buyDetail.setBuyDetailCount(buyDetailCount);
 		buyDetail.setBuyDetailType(buyDetailType);
+		buyDetail.setProDetailId(proDetailId);
 		buyDetail.setBuyId(buyId);
 		buyDetail.setProId(proId);
 		try{
@@ -43,10 +44,12 @@ public class BuyDetailController {
 //	删除权限
 	@RequestMapping(value="deleteBuyDetail")
 	@ResponseBody
-	public JsonResult<BuyDetail> deleteBuyDetail(String buyId, String proId){
+	public JsonResult<BuyDetail> deleteBuyDetail(String buyId, String proDetailId){
 		BuyDetail buyDetail = new BuyDetail();
+		buyDetail.setBuyId(buyId);
+		buyDetail.setProDetailId(proDetailId);
 		try{
-			int flag= buyDetailService.deleteBuyDetail(buyId, proId);
+			int flag= buyDetailService.deleteBuyDetail(buyDetail);
 			if(flag==1){
 				return new JsonResult<BuyDetail>(buyDetail);	
 			}else{
@@ -65,10 +68,11 @@ public class BuyDetailController {
 //	修改权限
 	@RequestMapping(value="updateBuyDetail")
 	@ResponseBody
-	public JsonResult<BuyDetail> updateBuyDetail(String buyId, String proId,int buyDetailCount,String buyDetailType){
+	public JsonResult<BuyDetail> updateBuyDetail(String buyId,String proDetailId, String proId,int buyDetailCount,String buyDetailType){
 		BuyDetail buyDetail = new BuyDetail();
 		buyDetail.setBuyDetailCount(buyDetailCount);
 		buyDetail.setBuyDetailType(buyDetailType);
+		buyDetail.setProDetailId(proDetailId);
 		buyDetail.setBuyId(buyId);
 		buyDetail.setProId(proId);
 		try{

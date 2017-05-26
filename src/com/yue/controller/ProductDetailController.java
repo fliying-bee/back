@@ -107,7 +107,7 @@ public class ProductDetailController {
 //	修改商品库存
 	@RequestMapping(value="updateProductDetailCount")
 	@ResponseBody
-	public JsonResult<ProductDetail> updateProductDetailCount(String proDetailId, int proDetailCount,String proDetailType){
+	public JsonResult<ProductDetail> updateProductDetailCount(String proDetailId, int proDetailCount,String proDetailType){		
 		ProductDetail productDetail = new ProductDetail();
 		productDetail.setProDetailId(proDetailId);
 		productDetail.setProDetailType(proDetailType);

@@ -2,10 +2,18 @@ package com.yue.model;
 
 public class BuyDetail {
 	private String buyId;
+	private String proDetailId;
 	private String proId;
 	private String buyDetailType;
 	private int buyDetailCount;
 	private Product product;
+	
+	public String getProDetailId() {
+		return proDetailId;
+	}
+	public void setProDetailId(String proDetailId) {
+		this.proDetailId = proDetailId;
+	}
 	public Product getProduct() {
 		return product;
 	}
