@@ -3,8 +3,22 @@ package com.yue.model;
 public class CustomDetail {
 	private String customId;		/*定制单编码*/ 
 	private String proId;			/*商品编码*/
-	private String cusDetailType;	/*商品型号*/
-	private int cusDetailCount;		/*商品数量*/
+	private String customDetailType;	/*商品型号*/
+	private int customDetailCount;		/*商品数量*/
+	private String proDetailId;
+	private Product product;
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public String getProDetailId() {
+		return proDetailId;
+	}
+	public void setProDetailId(String proDetailId) {
+		this.proDetailId = proDetailId;
+	}
 	public String getCustomId() {
 		return customId;
 	}
@@ -17,16 +31,17 @@ public class CustomDetail {
 	public void setProId(String proId) {
 		this.proId = proId;
 	}
-	public String getCusDetailType() {
-		return cusDetailType;
+	public String getCustomDetailType() {
+		return customDetailType;
 	}
-	public void setCusDetailType(String cusDetailType) {
-		this.cusDetailType = cusDetailType;
+	public void setCustomDetailType(String customDetailType) {
+		this.customDetailType = customDetailType;
 	}
-	public int getCusDetailCount() {
-		return cusDetailCount;
+	public int getCustomDetailCount() {
+		return customDetailCount;
 	}
-	public void setCusDetailCount(int cusDetailCount) {
-		this.cusDetailCount = cusDetailCount;
+	public void setCustomDetailCount(int customDetailCount) {
+		this.customDetailCount = customDetailCount;
 	}
+	
 }
