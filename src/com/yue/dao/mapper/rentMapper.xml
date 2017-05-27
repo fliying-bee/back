@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.RentDao">
+ 	<!-- 根据ID查购买单 -->
+ 	<resultMap id="queryForListMap" type="com.yue.model.RentOrder"> 
+ 		<id column="rentId" property="rentId" jdbcType="VARCHAR"/> 
+        <result column="rentOrderTime" property="rentOrderTime" jdbcType="DATE"/>
+        <result column="rentTime" property="rentTime" jdbcType="DATE"/>  
+        <result column="rentStatus" property="rentStatus" jdbcType="VARCHAR"/>  
+        <result column="logisStatus" property="logisStatus" jdbcType="VARCHAR"/>
+        <result column="pledge" property="pledge" jdbcType="FLOAT"/> 
+        <result column="rentPrice" property="rentPrice" jdbcType="FLOAT"/>   
+        <result column="rentPriceSum" property="rentPriceSum" jdbcType="FLOAT"/>  
+        <result column="userId" property="userId" jdbcType="VARCHAR"/> 
+        <result column="rentAddr" property="rentAddr" jdbcType="VARCHAR"/>  
+        <collection property="RentDetail" javaType="java.util.List" ofType="com.yue.model.RentDetail"> 
+            <id column="rentId" property="rentId" jdbcType="VARCHAR" /> 
+            <id column="proDetailId" property="proDetailId" jdbcType="VARCHAR" /> 
+            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+            <result column="proId" property="proId" jdbcType="VARCHAR" />  
+            <result column="rentDetailType" property="rentDetailType" jdbcType="VARCHAR" />  
+            <result column="rentDetailCount" property="rentDetailCount" jdbcType="INTEGER" />
+            <collection property="product" javaType="com.yue.model.Product" ofType="com.yue.model.Product"> 
+	            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+	            <result column="proName" property="proName" jdbcType="VARCHAR" />  
+	            <result column="proBuyPrice" property="proBuyPrice" jdbcType="VARCHAR" />  
+	            <result column="proSalePrice" property="proSalePrice" jdbcType="FLOAT" />
+	        	<result column="proPicPath" property="proPicPath" jdbcType="VARCHAR" />	 
+	        	<result column="proSellPrice" property="proSellPrice" jdbcType="FLOAT" />
+	        	<result column="proDesc" property="proDesc" jdbcType="VARCHAR" />
+	        	<result column="proType" property="proType" jdbcType="VARCHAR" />
+	        	<result column="draId" property="draId" jdbcType="VARCHAR" />
+	        	<result column="proCount" property="proCount" jdbcType="INTEGER" />	     
+	        </collection>
+        </collection>  
+    </resultMap>  
+    <!-- 更新物流状态 -->
+    <update id="updateRentLogisStatus" parameterType="Rent">
+        update BDRent 
+        set logisStatus=#{logisStatus} 
+        where rentId=#{rentId}
+    </update>
+    <select id="queryBackRentById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.rentId,  
+          u.rentOrderTime, 
+          u.rentTime,  
+          u.rentStatus,
+          u.logisStatus, 
+          u.rentAddr, 
+          u.pledge,
+          u.rentPrice,
+          u.rentPriceSum, 
+          u.userId, 
+          r.proDetailId, 
+          r.proId,  
+          r.rentDetailType,  
+          r.rentDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.proCount,
+          b.draId,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDRent u  
+        JOIN BDRentDetail r on (u.rentId = r.rentId and u.rentId=#{rentId})
+        JOIN BEProduct b on r.proId = b.proId 
+    </select>  
+ 	
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryBackAllRentPage" resultMap="queryForListMap">
+        SELECT  
+          u.rentId,  
+          u.rentOrderTime, 
+          u.rentTime,  
+          u.rentStatus,
+          u.logisStatus, 
+          u.rentAddr, 
+          u.pledge,
+          u.rentPrice,
+          u.rentPriceSum, 
+          u.userId, 
+          r.proDetailId, 
+          r.proId,  
+          r.rentDetailType,  
+          r.rentDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.proCount,
+          b.draId,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDRent u  
+        JOIN BDRentDetail r on u.rentId = r.rentId
+        JOIN BEProduct b on r.proId = b.proId
+    </select>
+ </mapper>

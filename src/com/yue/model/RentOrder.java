@@ -1,8 +1,9 @@
 package com.yue.model;
 
 import java.sql.Date;
+import java.util.List;
 
-public class Rent {
+public class RentOrder {
 	private String rentId;	      /*租赁单编码*/ 
 	private Date rentOrderTime;   /*租赁日期*/ 
 	private int rentTime;        /*租赁时间  上限7天*/ 
@@ -13,7 +14,13 @@ public class Rent {
 	private Float rentPriceSum;	  /*租赁单总价*/ 
 	private String userId;		  /*用户编码*/
 	private String rentAddr;	  /*收货地址*/
-	
+	private List<RentDetail> RentDetail;
+	public List<RentDetail> getRentDetail() {
+		return RentDetail;
+	}
+	public void setRentDetail(List<RentDetail> rentDetail) {
+		RentDetail = rentDetail;
+	}
 	public String getRentId() {
 		return rentId;
 	}

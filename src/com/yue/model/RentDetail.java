@@ -3,9 +3,16 @@ package com.yue.model;
 public class RentDetail {
 	private String rentId;			/*租赁单编码*/ 
 	private String proId;			/*商品编码*/
-	private String proDetailId;			/*商品明细编码*/
+	private String proDetailId;		/*商品明细编码*/
 	private String rentDetailType;	/*商品型号*/
 	private int rentDetailCount;	/*商品数量*/
+	private Product product;
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 	public String getProDetailId() {
 		return proDetailId;
 	}
