@@ -25,7 +25,11 @@
 	            <result column="proBuyPrice" property="proBuyPrice" jdbcType="VARCHAR" />  
 	            <result column="proSalePrice" property="proSalePrice" jdbcType="FLOAT" />
 	        	<result column="proPicPath" property="proPicPath" jdbcType="VARCHAR" />	 
-	        	<result column="proSellPrice" property="proSellPrice" jdbcType="FLOAT" />	     
+	        	<result column="proSellPrice" property="proSellPrice" jdbcType="FLOAT" />
+	        	<result column="proDesc" property="proDesc" jdbcType="VARCHAR" />
+	        	<result column="proType" property="proType" jdbcType="VARCHAR" />
+	        	<result column="draId" property="draId" jdbcType="VARCHAR" />
+	        	<result column="proCount" property="proCount" jdbcType="INTEGER" />	     
 	        </collection>
         </collection>  
     </resultMap>  
@@ -37,12 +41,18 @@
           u.logisStatus, 
           u.buyAddr, 
           u.buyPriceSum, 
-          u.userId, 
+          u.userId,
+          r.proDetailId, 
           r.proId,  
           r.buyDetailType,  
           r.buyDetailCount,
           b.proName,
+          b.proDesc,
+          b.proType,
+          b.proCount,
+          b.draId,
           b.proBuyPrice,
+          b.proSellPrice,
           b.proSalePrice,
           b.proPicPath
         FROM  
@@ -60,12 +70,18 @@
           u.logisStatus, 
           u.buyAddr, 
           u.buyPriceSum, 
-          u.userId, 
+          u.userId,
+          r.proDetailId, 
           r.proId,  
           r.buyDetailType,  
           r.buyDetailCount,
           b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
           b.proBuyPrice,
+          b.proSellPrice,
           b.proSalePrice,
           b.proPicPath
         FROM  
@@ -100,12 +116,18 @@
           u.logisStatus, 
           u.buyAddr, 
           u.buyPriceSum, 
-          u.userId, 
+          u.userId,
+          r.proDetailId, 
           r.proId,  
           r.buyDetailType,  
           r.buyDetailCount,
           b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
           b.proBuyPrice,
+          b.proSellPrice,
           b.proSalePrice,
           b.proPicPath
         FROM  
@@ -123,12 +145,18 @@
           u.logisStatus, 
           u.buyAddr, 
           u.buyPriceSum, 
-          u.userId, 
+          u.userId,
+          r.proDetailId, 
           r.proId,  
           r.buyDetailType,  
           r.buyDetailCount,
           b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
           b.proBuyPrice,
+          b.proSellPrice,
           b.proSalePrice,
           b.proPicPath
         FROM  
