@@ -16,4 +16,13 @@
         from BEProduct 
         where proId = #{proId}
     </select>
+    
+    <!-- 更新 -->
+    <update id="updateProduct" parameterType="Product">
+        update BEProduct 
+        set proName=#{proName},proBuyPrice=#{proBuyPrice},proCount=#{proCount},
+        proDesc=#{proDesc},proSalePrice=#{proSalePrice},proSellPrice=#{proSellPrice},
+        proPicPath=#{proPicPath}
+        where proId=#{proId}
+    </update>
  </mapper>

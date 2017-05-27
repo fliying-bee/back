@@ -69,5 +69,63 @@ public class ProductController {
 		}
 		
 	}
+	
+//	修改商品
+	@RequestMapping(value="updateProduct")
+	@ResponseBody
+	public JsonResult<Product> updateProduct(String proId,String proName,float proBuyPrice,int proCount,String proDesc,float proSalePrice,float proSellPrice,String proPicPath,String proType){
+		Product product = new Product();
+		product.setProBuyPrice(proBuyPrice);
+		product.setProCount(proCount);
+		product.setProDesc(proDesc);
+		product.setProId(proId);
+		product.setProName(proName);
+		product.setProPicPath(proPicPath);
+		product.setProSalePrice(proSalePrice);
+		product.setProSellPrice(proSellPrice);
+		product.setProType(proType);
+		try{
+			int flag= productService.updateProduct(product);
+			if(flag==1){
+				return new JsonResult<Product>(product);	
+			}else{
+				Product error = new Product();
+				JsonResult<Product> result = new JsonResult<Product>(error);
+				result.setCode("Error");
+				return result;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Product>(e);
+		}
+	}
+	
+//	修改商品库存
+	@RequestMapping(value="updateProductCount")
+	@ResponseBody
+	public JsonResult<Product> updateProductCount(String proId, int proCount){		
+		try{
+			Product product = productService.queryProductById(proId);
+			int oldCount = product.getProCount();
+			product.setProCount(oldCount-proCount);
+			try{
+				int flag= productService.updateProduct(product);
+				if(flag==1){
+					return new JsonResult<Product>(product);	
+				}else{
+					Product error = new Product();
+					JsonResult<Product> result = new JsonResult<Product>(error);
+					result.setCode("Error");
+					return result;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				return new JsonResult<Product>(e);
+			}
+		}catch(Exception e){
+			return new JsonResult<Product>(e);
+		}
+		
+	}
 
 }

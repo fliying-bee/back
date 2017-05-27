@@ -14,8 +14,8 @@ public class BuyDetailService {
 	public int insertBuyDetail(BuyDetail buyDetail){
     	return BuyDetailDao.insertBuyDetail(buyDetail);
     }
-	public int deleteBuyDetail(String buyId,String proId){
-    	return BuyDetailDao.deleteBuyDetail(buyId,proId);
+	public int deleteBuyDetail(BuyDetail buyDetail){
+    	return BuyDetailDao.deleteBuyDetail(buyDetail);
     }
 	public int updateBuyDetail(BuyDetail buyDetail){
     	return BuyDetailDao.updateBuyDetail(buyDetail);
