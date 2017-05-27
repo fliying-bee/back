@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.CustomDao">
+ 	<!-- 根据ID查购买单 -->
+ 	<resultMap id="queryForListMap" type="com.yue.model.CustomOrder"> 
+ 		<id column="customId" property="customId" jdbcType="VARCHAR"/> 
+        <result column="customOrderTime" property="customOrderTime" jdbcType="DATE"/>  
+        <result column="customStatus" property="customStatus" jdbcType="VARCHAR"/>  
+        <result column="logisStatus" property="logisStatus" jdbcType="VARCHAR"/>  
+        <result column="customCheck" property="customCheck" jdbcType="VARCHAR"/>  
+        <result column="customPrice" property="customPrice" jdbcType="FLOAT"/>  
+        <result column="userId" property="userId" jdbcType="VARCHAR"/> 
+        <result column="customAddr" property="customAddr" jdbcType="VARCHAR"/>  
+        <result column="customMsg" property="customMsg" jdbcType="VARCHAR"/>
+        <collection property="CustomDetail" javaType="java.util.List" ofType="com.yue.model.CustomDetail"> 
+            <id column="customId" property="customId" jdbcType="VARCHAR" /> 
+            <id column="proDetailId" property="proDetailId" jdbcType="VARCHAR" /> 
+            <result column="proDetailId" property="proDetailId" jdbcType="VARCHAR" />  
+            <result column="proId" property="proId" jdbcType="VARCHAR" />  
+            <result column="customDetailType" property="customDetailType" jdbcType="VARCHAR" />  
+            <result column="customDetailCount" property="customDetailCount" jdbcType="INTEGER" />
+            <collection property="product" javaType="com.yue.model.Product" ofType="com.yue.model.Product"> 
+	            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+	            <result column="proName" property="proName" jdbcType="VARCHAR" />  
+	            <result column="proBuyPrice" property="proBuyPrice" jdbcType="VARCHAR" />  
+	            <result column="proSalePrice" property="proSalePrice" jdbcType="FLOAT" />
+	        	<result column="proPicPath" property="proPicPath" jdbcType="VARCHAR" />	 
+	        	<result column="proSellPrice" property="proSellPrice" jdbcType="FLOAT" />
+	        	<result column="proDesc" property="proDesc" jdbcType="VARCHAR" />
+	        	<result column="proType" property="proType" jdbcType="VARCHAR" />
+	        	<result column="draId" property="draId" jdbcType="VARCHAR" />
+	        	<result column="proCount" property="proCount" jdbcType="INTEGER" />	     
+	        </collection>
+        </collection>  
+    </resultMap>  
+   
+    <!-- 更新审核状态 -->
+    <update id="updateCustomCheck" parameterType="Custom">
+        update BDCustom 
+        set customCheck=#{customCheck} 
+        where customId=#{customId}
+    </update>
+    <!-- 更新物流状态 -->
+    <update id="updateCustomLogisStatus" parameterType="Custom">
+        update BDCustom 
+        set logisStatus=#{logisStatus} 
+        where customId=#{customId}
+    </update>
+    <select id="queryBackCustomById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.customId,  
+          u.customOrderTime,  
+          u.customStatus,
+          u.logisStatus, 
+          u.customCheck,
+          u.customAddr, 
+          u.customPrice, 
+          u.customMsg,
+          u.userId,
+          r.proDetailId, 
+          r.proId,  
+          r.customDetailType,  
+          r.customDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDCustom u  
+        JOIN BDCustomDetail r on (u.customId = r.customId and u.customId=#{customId})
+        JOIN BEProduct b on r.proId = b.proId 
+    </select>  
+ 	
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryBackAllCustomPage" resultMap="queryForListMap">
+        SELECT  
+          u.customId,  
+          u.customOrderTime,  
+          u.customStatus,
+          u.logisStatus, 
+          u.customCheck,
+          u.customAddr, 
+          u.customMsg,
+          u.customPrice, 
+          u.userId,
+          r.proDetailId, 
+          r.proId,  
+          r.customDetailType,  
+          r.customDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDCustom u  
+        JOIN BDCustomDetail r on u.customId = r.customId
+        JOIN BEProduct b on r.proId = b.proId
+    </select>
+ </mapper>

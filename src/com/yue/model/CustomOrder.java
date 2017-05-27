@@ -1,8 +1,9 @@
 package com.yue.model;
 
 import java.sql.Date;
+import java.util.List;
 
-public class Custom {
+public class CustomOrder {
 	private String customId ;		/*定制单编码*/
 	private Date customOrderTime;	/*定制时间*/
 	private String customStatus;	/*定制单状态  已付款  未付款*/
@@ -12,6 +13,13 @@ public class Custom {
 	private String userId;			/*用户编码*/
 	private String customAddr;		/*收货地址*/
 	private String customMsg;		/*用户留言*/
+	private List<CustomDetail> CustomDetail;
+	public List<CustomDetail> getCustomDetail() {
+		return CustomDetail;
+	}
+	public void setCustomDetail(List<CustomDetail> customDetail) {
+		CustomDetail = customDetail;
+	}
 	public String getCustomMsg() {
 		return customMsg;
 	}
