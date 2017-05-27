@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC   
     "-//mybatis.org//DTD Mapper 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
- <mapper namespace="com.yue.dao.BuyDetailDao">
+ <mapper namespace="com.yue.dao.RentDetailDao">
     <!-- 插入 -->
-    <insert id="insertBuyDetail" parameterType="com.yue.model.BuyDetail">
-        insert into BDBuyDetail(proId,buyId,proDetailId,buyDetailCount,buyDetailType) 
-               values(#{proId},#{buyId},#{proDetailId},#{buyDetailCount},#{buyDetailType})
+    <insert id="insertRentDetail" parameterType="com.yue.model.RentDetail">
+        insert into BDRentDetail(proId,rentId,proDetailId,rentDetailCount,rentDetailType) 
+               values(#{proId},#{rentId},#{proDetailId},#{rentDetailCount},#{rentDetailType})
     </insert>  
     <!-- 删除 -->
-    <delete id="deleteBuyDetail" parameterType="String">
-        delete from BDBuyDetail 
-        where buyId=#{buyId} and proDetailId=#{proDetailId}
+    <delete id="deleteRentDetail" parameterType="String">
+        delete from BDRentDetail 
+        where rentId=#{rentId} and proDetailId=#{proDetailId}
     </delete>
     <!-- 更新 -->
-    <update id="updateBuyDetail" parameterType="BuyDetail">
-        update BDBuyDetail 
-        set proId=#{proId} and buyDetailCount=#{buyDetailCount},buyDetailType=#{buyDetailType} 
-        where proDetailId=#{proDetailId} and buyId=#{buyId}
+    <update id="updateRentDetail" parameterType="com.yue.model.RentDetail">
+        update BDRentDetail 
+        set proId=#{proId} and rentDetailCount=#{rentDetailCount},rentDetailType=#{rentDetailType} 
+        where proDetailId=#{proDetailId} and rentId=#{rentId}
     </update>
  </mapper>

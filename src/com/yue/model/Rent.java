@@ -8,8 +8,6 @@ public class Rent {
 	private int rentTime;        /*租赁时间  上限7天*/ 
 	private String rentStatus;    /*租赁单状态   已付款  未付款*/
 	private String logisStatus;   /*物流状态 商家未发货 商家已发货 用户已收货 用户已发货 商家已收货*/
-	private Float pledge;         /*租赁单押金  商品售价*50%*/
-	private Float rentPrice; 	  /*租赁单租金  商品售价*7%/天   */ 
 	private Float rentPriceSum;	  /*租赁单总价*/ 
 	private String userId;		  /*用户编码*/
 	private String rentAddr;	  /*收货地址*/
@@ -43,18 +41,6 @@ public class Rent {
 	}
 	public void setLogisStatus(String logisStatus) {
 		this.logisStatus = logisStatus;
-	}
-	public Float getPledge() {
-		return pledge;
-	}
-	public void setPledge(Float pledge) {
-		this.pledge = pledge;
-	}
-	public Float getRentPrice() {
-		return rentPrice;
-	}
-	public void setRentPrice(Float rentPrice) {
-		this.rentPrice = rentPrice;
 	}
 	public Float getRentPriceSum() {
 		return rentPriceSum;

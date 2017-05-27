@@ -10,8 +10,6 @@
         <result column="rentTime" property="rentTime" jdbcType="DATE"/>  
         <result column="rentStatus" property="rentStatus" jdbcType="VARCHAR"/>  
         <result column="logisStatus" property="logisStatus" jdbcType="VARCHAR"/>
-        <result column="pledge" property="pledge" jdbcType="FLOAT"/> 
-        <result column="rentPrice" property="rentPrice" jdbcType="FLOAT"/>   
         <result column="rentPriceSum" property="rentPriceSum" jdbcType="FLOAT"/>  
         <result column="userId" property="userId" jdbcType="VARCHAR"/> 
         <result column="rentAddr" property="rentAddr" jdbcType="VARCHAR"/>  
@@ -50,8 +48,6 @@
           u.rentStatus,
           u.logisStatus, 
           u.rentAddr, 
-          u.pledge,
-          u.rentPrice,
           u.rentPriceSum, 
           u.userId, 
           r.proDetailId, 
@@ -82,8 +78,6 @@
           u.rentStatus,
           u.logisStatus, 
           u.rentAddr, 
-          u.pledge,
-          u.rentPrice,
           u.rentPriceSum, 
           u.userId, 
           r.proDetailId, 
@@ -104,4 +98,15 @@
         JOIN BDRentDetail r on u.rentId = r.rentId
         JOIN BEProduct b on r.proId = b.proId
     </select>
+     <!-- 插入 -->
+    <insert id="insertRent" parameterType="com.yue.model.Rent">
+        insert into BDRent(rentId,rentPriceSum,userId,rentOrderTime,rentStatus,logisStatus,rentAddr,rentTime) 
+               values(#{rentId},#{rentPriceSum},#{userId},#{rentOrderTime},#{rentStatus},#{logisStatus},#{rentAddr},#{rentTime})
+    </insert>
+    <!-- 更新付款状态 -->
+    <update id="updateRentStatus" parameterType="com.yue.model.Rent">
+        update BDRent 
+        set rentStatus=#{rentStatus} 
+        where rentId=#{rentId}
+    </update>
  </mapper>
