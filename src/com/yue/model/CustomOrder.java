@@ -9,7 +9,7 @@ public class CustomOrder {
 	private String customStatus;	/*定制单状态  已付款  未付款*/
 	private String logisStatus;		/*物流状态  未发货  已发货   已收货*/
 	private String customCheck;		/*定制单审核状态  已审核  未审核*/
-	private Float customPrice;		/*定制单价格*/
+	private Float customPriceSum;		/*定制单价格*/
 	private String userId;			/*用户编码*/
 	private String customAddr;		/*收货地址*/
 	private String customMsg;		/*用户留言*/
@@ -56,11 +56,12 @@ public class CustomOrder {
 	public void setCustomCheck(String customCheck) {
 		this.customCheck = customCheck;
 	}
-	public Float getCustomPrice() {
-		return customPrice;
+	
+	public Float getCustomPriceSum() {
+		return customPriceSum;
 	}
-	public void setCustomPrice(Float customPrice) {
-		this.customPrice = customPrice;
+	public void setCustomPriceSum(Float customPriceSum) {
+		this.customPriceSum = customPriceSum;
 	}
 	public String getUserId() {
 		return userId;
