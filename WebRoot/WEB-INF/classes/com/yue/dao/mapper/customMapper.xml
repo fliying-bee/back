@@ -10,7 +10,7 @@
         <result column="customStatus" property="customStatus" jdbcType="VARCHAR"/>  
         <result column="logisStatus" property="logisStatus" jdbcType="VARCHAR"/>  
         <result column="customCheck" property="customCheck" jdbcType="VARCHAR"/>  
-        <result column="customPrice" property="customPrice" jdbcType="FLOAT"/>  
+        <result column="customPriceSum" property="customPriceSum" jdbcType="FLOAT"/>  
         <result column="userId" property="userId" jdbcType="VARCHAR"/> 
         <result column="customAddr" property="customAddr" jdbcType="VARCHAR"/>  
         <result column="customMsg" property="customMsg" jdbcType="VARCHAR"/>
@@ -56,7 +56,7 @@
           u.logisStatus, 
           u.customCheck,
           u.customAddr, 
-          u.customPrice, 
+          u.customPriceSum, 
           u.customMsg,
           u.userId,
           r.proDetailId, 
@@ -88,7 +88,7 @@
           u.customCheck,
           u.customAddr, 
           u.customMsg,
-          u.customPrice, 
+          u.customPriceSum, 
           u.userId,
           r.proDetailId, 
           r.proId,  
@@ -128,7 +128,7 @@
           u.customCheck,
           u.customAddr, 
           u.customMsg,
-          u.customPrice, 
+          u.customPriceSum, 
           u.userId,
           r.proDetailId, 
           r.proId,  
@@ -159,7 +159,7 @@
           u.customCheck,
           u.customAddr, 
           u.customMsg,
-          u.customPrice, 
+          u.customPriceSum, 
           u.userId,
           r.proDetailId, 
           r.proId,  
