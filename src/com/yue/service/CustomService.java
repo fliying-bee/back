@@ -14,18 +14,18 @@ public class CustomService {
 	@Autowired
 	private CustomDao CustomDao;
 	
-//	public CustomOrder queryCustomById(String customId,String userId){
-//    	return CustomDao.queryCustomById(customId,userId);
-//    }
-//	public List<CustomOrder> queryAllCustomPage(String userId){
-//    	return CustomDao.queryAllCustomPage(userId);
-//    }
-//	public int insertCustom(Custom custom){
-//    	return CustomDao.insertCustom(custom);
-//    }
-//	public int updateCustomStatus(Custom custom){
-//    	return CustomDao.updateCustomStatus(custom);
-//    }
+	public CustomOrder queryCustomById(String customId,String userId){
+    	return CustomDao.queryCustomById(customId,userId);
+    }
+	public List<CustomOrder> queryAllCustomPage(String userId){
+    	return CustomDao.queryAllCustomPage(userId);
+    }
+	public int insertCustom(Custom custom){
+    	return CustomDao.insertCustom(custom);
+    }
+	public int updateCustomStatus(Custom custom){
+    	return CustomDao.updateCustomStatus(custom);
+    }
 	
 	
 	public int updateCustomCheck(Custom custom){

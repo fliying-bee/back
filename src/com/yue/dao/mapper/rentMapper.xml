@@ -109,4 +109,62 @@
         set rentStatus=#{rentStatus} 
         where rentId=#{rentId}
     </update>
+    <select id="queryRentById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.rentId,  
+          u.rentOrderTime, 
+          u.rentTime,  
+          u.rentStatus,
+          u.logisStatus, 
+          u.rentAddr, 
+          u.rentPriceSum, 
+          u.userId, 
+          r.proDetailId, 
+          r.proId,  
+          r.rentDetailType,  
+          r.rentDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.proCount,
+          b.draId,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDRent u  
+        JOIN BDRentDetail r on (u.rentId = r.rentId and u.rentId=#{rentId} and u.userId=#{userId})
+        JOIN BEProduct b on r.proId = b.proId
+    </select>  
+ 	
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryAllRentPage" resultMap="queryForListMap">
+        SELECT  
+          u.rentId,  
+          u.rentOrderTime, 
+          u.rentTime,  
+          u.rentStatus,
+          u.logisStatus, 
+          u.rentAddr, 
+          u.rentPriceSum, 
+          u.userId, 
+          r.proDetailId, 
+          r.proId,  
+          r.rentDetailType,  
+          r.rentDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.proCount,
+          b.draId,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDRent u  
+        JOIN BDRentDetail r on (u.rentId = r.rentId and u.userId=#{userId})
+        JOIN BEProduct b on r.proId = b.proId
+    </select>
  </mapper>

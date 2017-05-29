@@ -1,6 +1,8 @@
 package com.yue.controller;
 
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +118,122 @@ public class CustomController {
 			return new JsonResult<CustomOrder>(e);
 		}
 		
+	}
+//	分页查询用户的所有租赁单
+	@RequestMapping(value="queryAllCustomPage")
+	@ResponseBody
+	public JsonResult<Page<CustomOrder>> queryAllCustomPage(int currentPage, int pageSize, String userId){
+		try{
+			List<CustomOrder> getCustom= CustomService.queryAllCustomPage(userId);
+			Page<CustomOrder> page = new Page<CustomOrder>();
+			page.setCurrentPage(currentPage);
+			page.setPageSize(pageSize);
+			page.setTotalRow(getCustom.size());
+			List<CustomOrder> pageBuy = new ArrayList<CustomOrder>();
+			int start = (page.getCurrentPage()-1)*page.getPageSize();
+			int end = start + page.getPageSize();
+			for(int i=start;i<end;i++){
+				try{
+					pageBuy.add(getCustom.get(i));
+				}catch(Exception e){
+					
+				}
+			}
+			page.setList(pageBuy);
+			try{
+				return new JsonResult<Page<CustomOrder>>(page);
+			}catch(Exception e){
+				return new JsonResult<Page<CustomOrder>>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Page<CustomOrder>>(e);
+		}
+		
+	}
+
+//	根据租赁单编码与用户查询租赁单
+	@RequestMapping(value="queryCustomById")
+	@ResponseBody
+	public JsonResult<CustomOrder> queryCustomById(String CustomId, String userId){
+		try{
+			CustomOrder getBuy= CustomService.queryCustomById(CustomId,userId);
+			try{
+				return new JsonResult<CustomOrder>(getBuy);
+			}catch(Exception e){
+				return new JsonResult<CustomOrder>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<CustomOrder>(e);
+		}
+		
+	}
+	
+//	插入租赁单
+	@RequestMapping(value="insertCustom")
+	@ResponseBody
+	public JsonResult<Custom> insertBuy(String customId,float customPriceSum,String userId, String customAddr, String customMsg){
+		Custom custom = new Custom();
+		custom.setCustomId(customId);
+		custom.setCustomPriceSum(customPriceSum);
+		custom.setUserId(userId);
+		custom.setCustomAddr(customAddr);
+		custom.setCustomMsg(customMsg);
+		//获取当前日期
+		Date nowTime = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		String retStrFormatNowDate = sdFormatter.format(nowTime);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date CustomOrderTime = new Date(format.parse(retStrFormatNowDate).getTime());
+			custom.setCustomOrderTime(CustomOrderTime);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		custom.setCustomStatus("notpay");
+		custom.setLogisStatus("notsend");
+		custom.setCustomCheck("notcheck");
+		
+		try{
+			int flag= CustomService.insertCustom(custom);
+			if(flag==1){
+				return new JsonResult<Custom>(custom);	
+			}else{
+				Custom error = new Custom();
+				JsonResult<Custom> result = new JsonResult<Custom>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Custom>(e);
+		}
+		
+	}
+
+//	修改租赁单付款状态
+	@RequestMapping(value="updateCustomStatus")
+	@ResponseBody
+	public JsonResult<Custom> updateBuyStatus(String customId, String customStatus){
+		Custom custom = new Custom();
+		custom.setCustomId(customId);
+		custom.setCustomStatus(customStatus);
+		try{
+			int flag= CustomService.updateCustomStatus(custom);
+			if(flag==1){
+				return new JsonResult<Custom>(custom);	
+			}else{
+				Custom error = new Custom();
+				JsonResult<Custom> result = new JsonResult<Custom>(error);
+				result.setCode("Error");
+				return result;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Custom>(e);
+		}
 	}
 }
 

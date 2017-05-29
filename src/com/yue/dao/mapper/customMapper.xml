@@ -37,13 +37,13 @@
     </resultMap>  
    
     <!-- 更新审核状态 -->
-    <update id="updateCustomCheck" parameterType="Custom">
+    <update id="updateCustomCheck" parameterType="com.yue.model.Custom">
         update BDCustom 
         set customCheck=#{customCheck} 
         where customId=#{customId}
     </update>
     <!-- 更新物流状态 -->
-    <update id="updateCustomLogisStatus" parameterType="Custom">
+    <update id="updateCustomLogisStatus" parameterType="com.yue.model.Custom">
         update BDCustom 
         set logisStatus=#{logisStatus} 
         where customId=#{customId}
@@ -106,6 +106,77 @@
         FROM  
           BDCustom u  
         JOIN BDCustomDetail r on u.customId = r.customId
+        JOIN BEProduct b on r.proId = b.proId
+    </select>
+     <!-- 插入 -->
+    <insert id="insertCustom" parameterType="com.yue.model.Custom">
+        insert into BDCustom(customId,customPriceSum,userId,customOrderTime,customStatus,customCheck,logisStatus,customAddr,customMsg) 
+               values(#{customId},#{customPriceSum},#{userId},#{customOrderTime},#{customStatus},#{customCheck},#{logisStatus},#{customAddr},#{customMsg})
+    </insert>
+    <!-- 更新付款状态 -->
+    <update id="updateCustomStatus" parameterType="com.yue.model.Custom">
+        update BDCustom 
+        set customStatus=#{customStatus} 
+        where customtId=#{customtId}
+    </update>
+    <select id="queryCustomById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.customId,  
+          u.customOrderTime,  
+          u.customStatus,
+          u.logisStatus, 
+          u.customCheck,
+          u.customAddr, 
+          u.customMsg,
+          u.customPrice, 
+          u.userId,
+          r.proDetailId, 
+          r.proId,  
+          r.customDetailType,  
+          r.customDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDCustom u
+        JOIN BDCustomDetail r on (u.customId = r.customId and u.customId=#{customId} and u.userId=#{userId})
+        JOIN BEProduct b on r.proId = b.proId 
+    </select>  
+ 	
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryAllCustomPage" resultMap="queryForListMap">
+        SELECT  
+          u.customId,  
+          u.customOrderTime,  
+          u.customStatus,
+          u.logisStatus, 
+          u.customCheck,
+          u.customAddr, 
+          u.customMsg,
+          u.customPrice, 
+          u.userId,
+          r.proDetailId, 
+          r.proId,  
+          r.customDetailType,  
+          r.customDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDCustom u  
+        JOIN BDCustomDetail r on (u.customId = r.customId and u.userId=#{userId})
         JOIN BEProduct b on r.proId = b.proId
     </select>
  </mapper>
