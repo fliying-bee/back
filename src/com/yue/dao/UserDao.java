@@ -13,10 +13,6 @@ public interface UserDao {
 	 public User queryUserByName(User user);
 	 public int insertUser(User user);
 	 public List<User> queryAllUser();
-//	 public int insertUser(User user);
-//	 public int deleteUser(int id);
-//	 public int updateUser(User user);
-//	 public void mergeUser(User user);
-//	 public List<User> selectUser(String username_cx);
+	 public int updateUser(User user);
 }
 

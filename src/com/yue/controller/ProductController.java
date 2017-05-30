@@ -69,7 +69,37 @@ public class ProductController {
 		}
 		
 	}
-	
+//	插入权限
+	@RequestMapping(value="insertProduct")
+	@ResponseBody
+	public JsonResult<Product> insertProduct(String proId,String proName,float proBuyPrice,String proDesc,float proSalePrice,float proSellPrice,String proPicPath,String proType){
+		Product product = new Product();
+		product.setProBuyPrice(proBuyPrice);
+		product.setProCount(0);
+		product.setProDesc(proDesc);
+		product.setProId(proId);
+		product.setProName(proName);
+		product.setProPicPath(proPicPath);
+		product.setProSalePrice(proSalePrice);
+		product.setProSellPrice(proSellPrice);
+		product.setProType(proType);
+		try{
+			int flag= productService.insertProduct(product);
+			if(flag==1){
+				return new JsonResult<Product>(product);	
+			}else{
+				Product error = new Product();
+				JsonResult<Product> result = new JsonResult<Product>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Product>(e);
+		}
+		
+	}
 //	修改商品
 	@RequestMapping(value="updateProduct")
 	@ResponseBody
