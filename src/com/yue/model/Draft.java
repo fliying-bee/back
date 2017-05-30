@@ -3,14 +3,27 @@ package com.yue.model;
 public class Draft {
 	private String draId; 			/*稿件编码*/ 
 	private String draName;			/*稿件名*/  
-	private float draPicPath; 		/*稿件图片路径*/  
+	private String draPicPath; 		/*稿件图片路径*/  
 	private String draDesc;  		/*稿件描述*/  
-	private String draPrice;	 	/*稿件价格*/  
+	private float draPrice;	 		/*稿件价格*/  
 	private String drAuthor;  		/*稿件作者*/ 
 	private String draCheck;		/*稿件审核状态  已审核  未审核*/ 
 	private String userId; 		 	/*用户编码*/
 	private String empId; 	 		/*员工编码*/
 	private String customId; 		/*定制单编码*/
+	
+	public String getDraPicPath() {
+		return draPicPath;
+	}
+	public void setDraPicPath(String draPicPath) {
+		this.draPicPath = draPicPath;
+	}
+	public float getDraPrice() {
+		return draPrice;
+	}
+	public void setDraPrice(float draPrice) {
+		this.draPrice = draPrice;
+	}
 	public String getDraId() {
 		return draId;
 	}
@@ -23,23 +36,11 @@ public class Draft {
 	public void setDraName(String draName) {
 		this.draName = draName;
 	}
-	public float getDraPicPath() {
-		return draPicPath;
-	}
-	public void setDraPicPath(float draPicPath) {
-		this.draPicPath = draPicPath;
-	}
 	public String getDraDesc() {
 		return draDesc;
 	}
 	public void setDraDesc(String draDesc) {
 		this.draDesc = draDesc;
-	}
-	public String getDraPrice() {
-		return draPrice;
-	}
-	public void setDraPrice(String draPrice) {
-		this.draPrice = draPrice;
 	}
 	public String getDrAuthor() {
 		return drAuthor;
