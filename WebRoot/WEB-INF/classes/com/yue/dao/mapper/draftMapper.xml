@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.DraftDao">
+ 	<!-- 根据ID查权限 -->
+    <select id="queryBackDraftById" resultType="com.yue.model.Draft" parameterType="String">
+        select * 
+        from BEDraft 
+        where draId = #{draId}
+    </select>
+   	 <!-- 分页查询所有权限-->
+    <select id="queryBackAllDraftPage" resultType="com.yue.model.Draft">
+        select *
+        from BEDraft
+    </select>
+    
+ </mapper>
