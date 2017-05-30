@@ -21,9 +21,9 @@ public class DraftService {
     	return DraftDao.queryBackAllDraftPage();
     }
 	
-//	public int updateDraftCheck(Draft draft){
-//    	return DraftDao.updateDraftCheck(draft);
-//    }
+	public int updateDraftCheck(Draft draft){
+    	return DraftDao.updateDraftCheck(draft);
+    }
 	
 //	public List<Draft>  queryBackDraftByCheck(String draCheck){
 //    	return DraftDao.queryBackDraftByCheck(draCheck);
