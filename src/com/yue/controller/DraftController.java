@@ -71,28 +71,28 @@ public class DraftController {
 	}
 
 //	修改定制单审核状态
-//	@RequestMapping(value="updateDraftCheck")
-//	@ResponseBody
-//	public JsonResult<Draft> updateDraftCheck(String draId,String draCheck){
-//		Draft draft = new Draft();
-//		draft.setDraId(draId);
-//		draft.setDraCheck(draCheck);
-//		try{
-//			
-//			int flag= DraftService.updateDraftCheck(draft);
-//			if(flag==1){
-//				return new JsonResult<Draft>(draft);	
-//			}else{
-//				Draft error = new Draft();
-//				JsonResult<Draft> result = new JsonResult<Draft>(error);
-//				result.setCode("Error");
-//				return result;
-//			}
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			return new JsonResult<Draft>(e);
-//		}
-//	}	
+	@RequestMapping(value="updateDraftCheck")
+	@ResponseBody
+	public JsonResult<Draft> updateDraftCheck(String draId,String draCheck){
+		Draft draft = new Draft();
+		draft.setDraId(draId);
+		draft.setDraCheck(draCheck);
+		try{
+			
+			int flag= DraftService.updateDraftCheck(draft);
+			if(flag==1){
+				return new JsonResult<Draft>(draft);	
+			}else{
+				Draft error = new Draft();
+				JsonResult<Draft> result = new JsonResult<Draft>(error);
+				result.setCode("Error");
+				return result;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Draft>(e);
+		}
+	}	
 //	插入权限
 	@RequestMapping(value="insertDraft")
 	@ResponseBody

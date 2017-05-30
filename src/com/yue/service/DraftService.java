@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.yue.dao.DraftDao;
 import com.yue.model.Draft;
-import com.yue.model.Draft;
 
 @Service
 public class DraftService {
@@ -22,13 +21,12 @@ public class DraftService {
     	return DraftDao.queryBackAllDraftPage();
     }
 	
+	public int updateDraftCheck(Draft draft){
+    	return DraftDao.updateDraftCheck(draft);
+    }
 	public int insertDraft(Draft draft){
     	return DraftDao.insertDraft(draft);
     }
-	
-//	public int updateDraftCheck(Draft draft){
-//    	return DraftDao.updateDraftCheck(draft);
-//    }
 	
 //	public List<Draft>  queryBackDraftByCheck(String draCheck){
 //    	return DraftDao.queryBackDraftByCheck(draCheck);
