@@ -16,8 +16,7 @@ import com.yue.util.JsonResult;
 @Controller
 public class DraftController {
 	@Autowired
-	private DraftService DraftService;
-	
+	private DraftService DraftService;	
 	
 //	分页查询
 	@RequestMapping(value="queryBackAllDraftPage")
@@ -25,6 +24,38 @@ public class DraftController {
 	public JsonResult<Page<Draft>> queryBackAllDraftPage(int currentPage, int pageSize){
 		try{
 			List<Draft> getDraft= DraftService.queryBackAllDraftPage();
+			Page<Draft> page = new Page<Draft>();
+			page.setCurrentPage(currentPage);
+			page.setPageSize(pageSize);
+			page.setTotalRow(getDraft.size());
+			List<Draft> pageDraft = new ArrayList<Draft>();
+			int start = (page.getCurrentPage()-1)*page.getPageSize();
+			int end = start + page.getPageSize();
+			for(int i=start;i<end;i++){
+				try{
+					pageDraft.add(getDraft.get(i));
+				}catch(Exception e){
+					
+				}
+			}
+			page.setList(pageDraft);
+			try{
+				return new JsonResult<Page<Draft>>(page);
+			}catch(Exception e){
+				return new JsonResult<Page<Draft>>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Page<Draft>>(e);
+		}
+		
+	}
+//	分页查询
+	@RequestMapping(value="queryAllDraftPage")
+	@ResponseBody
+	public JsonResult<Page<Draft>> queryAllDraftPage(int currentPage, int pageSize,String userId){
+		try{
+			List<Draft> getDraft= DraftService.queryAllDraftPage(userId);
 			Page<Draft> page = new Page<Draft>();
 			page.setCurrentPage(currentPage);
 			page.setPageSize(pageSize);

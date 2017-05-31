@@ -119,10 +119,10 @@ public class RentController {
 //	修改租赁单付款状态
 	@RequestMapping(value="updateRentStatus")
 	@ResponseBody
-	public JsonResult<Rent> updateBuyStatus(String rentId, String buyStatus){
+	public JsonResult<Rent> updateBuyStatus(String rentId, String rentStatus){
 		Rent rent = new Rent();
 		rent.setRentId(rentId);
-		rent.setRentStatus(buyStatus);
+		rent.setRentStatus(rentStatus);
 		try{
 			int flag= RentService.updateRentStatus(rent);
 			if(flag==1){

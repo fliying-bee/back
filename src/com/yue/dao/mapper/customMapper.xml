@@ -117,7 +117,7 @@
     <update id="updateCustomStatus" parameterType="com.yue.model.Custom">
         update BDCustom 
         set customStatus=#{customStatus} 
-        where customtId=#{customtId}
+        where customId=#{customId}
     </update>
     <select id="queryCustomById" resultMap="queryForListMap" parameterType="String">  
         SELECT  
