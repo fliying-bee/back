@@ -16,13 +16,17 @@
         from BEProduct 
         where proId = #{proId}
     </select>
-    
+    <!-- 插入 -->
+    <insert id="insertProduct" parameterType="com.yue.model.Product">
+        insert into BEProduct(proName,proBuyPrice,proCount,proDesc,proSalePrice,proSellPrice,proPicPath,proType) 
+               values(#{proName},#{proBuyPrice},#{proCount},#{proDesc},#{proSalePrice},#{proSellPrice},#{proPicPath},#{proType})
+    </insert>
     <!-- 更新 -->
     <update id="updateProduct" parameterType="Product">
         update BEProduct 
         set proName=#{proName},proBuyPrice=#{proBuyPrice},proCount=#{proCount},
         proDesc=#{proDesc},proSalePrice=#{proSalePrice},proSellPrice=#{proSellPrice},
-        proPicPath=#{proPicPath}
+        proPicPath=#{proPicPath},proType=#{proType}
         where proId=#{proId}
     </update>
  </mapper>

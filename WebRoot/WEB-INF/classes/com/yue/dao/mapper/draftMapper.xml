@@ -14,6 +14,12 @@
         select *
         from BEDraft
     </select>
+    <!-- 插入 -->
+    <insert id="insertDraft" parameterType="com.yue.model.Draft">
+        insert into BEDraft(draId,draName,draPicPath,draDesc,draPrice,drAuthor,draCheck,userId) 
+               values(#{draId},#{draName},#{draPicPath},#{draDesc},#{draPrice},#{drAuthor},#{draCheck},#{userId})
+    </insert>
+
     <update id="updateDraftCheck" parameterType="com.yue.model.Draft">
         update BEDraft
         set draCheck=#{draCheck} 

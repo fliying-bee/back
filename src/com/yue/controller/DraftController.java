@@ -2,6 +2,7 @@ package com.yue.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,5 +93,36 @@ public class DraftController {
 			return new JsonResult<Draft>(e);
 		}
 	}	
+//	插入权限
+	@RequestMapping(value="insertDraft")
+	@ResponseBody
+	public JsonResult<Draft> insertDraft(String draId, String draDesc,String draName,float draPrice,String drAuthor,String draPicPath,String userId) {
+		Draft draft = new Draft();
+		draft.setDraId(draId);
+		draft.setDraDesc(draDesc);
+		draft.setDraName(draName);
+		draft.setDraPrice(draPrice);
+		draft.setDrAuthor(drAuthor);
+		draft.setDraCheck("notcheck");
+		draft.setUserId(userId);      
+        draft.setDraPicPath(draPicPath);		
+		try{
+			int flag= DraftService.insertDraft(draft);
+			if(flag==1){
+				return new JsonResult<Draft>(draft);	
+			}else{
+				Draft error = new Draft();
+				JsonResult<Draft> result = new JsonResult<Draft>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Draft>(e);
+		}
+	   
+		
+	}
 
 }

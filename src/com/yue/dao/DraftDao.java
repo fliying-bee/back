@@ -12,6 +12,8 @@ public interface DraftDao {
 	public Draft queryBackDraftById(String draId);
 	//分页查询所有
 	public List<Draft> queryBackAllDraftPage();
+	//插入
+	public int insertDraft(Draft Draft);
 	//
 //	public List<Draft> queryBackDraftByCheck(String draCheck);
 }

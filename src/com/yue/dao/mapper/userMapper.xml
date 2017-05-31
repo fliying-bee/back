@@ -29,4 +29,10 @@
         select *
         from BEUser 
     </select>
+    <!-- 更新 -->
+    <update id="updateUser" parameterType="com.yue.model.User">
+        update BEUser 
+        set userName=#{userName},password=#{password},userTel=#{userTel},userAddr=#{userAddr},userSex=#{userSex}
+        where userId=#{userId}
+    </update>
  </mapper>

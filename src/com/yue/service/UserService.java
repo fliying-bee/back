@@ -27,19 +27,8 @@ public class UserService {
     public User queryUserById(String userId){
     	return userdao.queryUserById(userId);
     }
-//    public int insertUser(User user){
-//    	return iuser.insertUser(user);
-//    }
-//    public int deleteUser(int id){
-//    	return iuser.deleteUser(id);
-//    }
-//	public int updateUser(User user) {
-//		return iuser.updateUser(user);
-//	}
-//	public void mergeUser(User user) {
-//		 iuser.mergeUser(user);
-//	}
-//	public List<User> selectUser(String username_cx) {
-//		return iuser.selectUser(username_cx);
-//	}
+    public int updateUser(User user) {
+		return userdao.updateUser(user);
+	}
+
 }

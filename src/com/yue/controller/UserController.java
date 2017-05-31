@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import com.yue.model.Page;
 import com.yue.model.User;
+import com.yue.model.Page;
 import com.yue.service.UserService;
 import com.yue.util.JsonResult;
 
@@ -129,5 +129,31 @@ public class UserController {
 			return new JsonResult<User>(e);
 		}
 		
+	}
+//	修改权限
+	@RequestMapping(value="updateUser")
+	@ResponseBody
+	public JsonResult<User> updateUser(String userId,String userName,String password,String userTel,String userAddr,String userSex){
+		User user = new User();
+		user.setUserId(userId);
+		user.setUserName(userName);
+		user.setPassword(password);
+		user.setUserTel(userTel);
+		user.setUserAddr(userAddr);
+		user.setUserSex(userSex);
+		try{
+			int flag= userService.updateUser(user);
+			if(flag==1){
+				return new JsonResult<User>(user);	
+			}else{
+				User error = new User();
+				JsonResult<User> result = new JsonResult<User>(error);
+				result.setCode("Error");
+				return result;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<User>(e);
+		}
 	}
 }
