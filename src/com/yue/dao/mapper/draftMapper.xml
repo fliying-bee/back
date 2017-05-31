@@ -14,6 +14,11 @@
         select *
         from BEDraft
     </select>
+     <!-- 分页查询所有权限-->
+    <select id="queryAllDraftPage" resultType="com.yue.model.Draft">
+        select *
+        from BEDraft
+    </select>
     <!-- 插入 -->
     <insert id="insertDraft" parameterType="com.yue.model.Draft">
         insert into BEDraft(draId,draName,draPicPath,draDesc,draPrice,drAuthor,draCheck,userId) 

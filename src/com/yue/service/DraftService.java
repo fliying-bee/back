@@ -21,15 +21,14 @@ public class DraftService {
     	return DraftDao.queryBackAllDraftPage();
     }
 	
+	public List<Draft> queryAllDraftPage(String userId){
+    	return DraftDao.queryAllDraftPage(userId);
+    }
+	
 	public int updateDraftCheck(Draft draft){
     	return DraftDao.updateDraftCheck(draft);
     }
 	public int insertDraft(Draft draft){
     	return DraftDao.insertDraft(draft);
     }
-	
-//	public List<Draft>  queryBackDraftByCheck(String draCheck){
-//    	return DraftDao.queryBackDraftByCheck(draCheck);
-//    }
-//	
 }
