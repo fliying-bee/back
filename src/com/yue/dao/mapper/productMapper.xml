@@ -3,6 +3,7 @@
     "-//mybatis.org//DTD Mapper 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
  <mapper namespace="com.yue.dao.ProductDao">
+ 	
     <!-- 分页查询所有商品 -->
     <select id="queryProductPageByType" resultType="com.yue.model.Product" parameterType="String">
         select *
@@ -18,15 +19,19 @@
     </select>
     <!-- 插入 -->
     <insert id="insertProduct" parameterType="com.yue.model.Product">
-        insert into BEProduct(proName,proBuyPrice,proCount,proDesc,proSalePrice,proSellPrice,proPicPath,proType) 
-               values(#{proName},#{proBuyPrice},#{proCount},#{proDesc},#{proSalePrice},#{proSellPrice},#{proPicPath},#{proType})
+        insert into BEProduct(proId,proName,proBuyPrice,proCount,proDesc,proSalePrice,proSellPrice,proPicPath,proType) 
+               values(#{proId},#{proName},#{proBuyPrice},#{proCount},#{proDesc},#{proSalePrice},#{proSellPrice},#{proPicPath},#{proType})
     </insert>
     <!-- 更新 -->
     <update id="updateProduct" parameterType="Product">
         update BEProduct 
-        set proName=#{proName},proBuyPrice=#{proBuyPrice},proCount=#{proCount},
-        proDesc=#{proDesc},proSalePrice=#{proSalePrice},proSellPrice=#{proSellPrice},
+        set proName=#{proName},proDesc=#{proDesc},proSellPrice=#{proSellPrice},
+        proBuyPrice=#{proBuyPrice},proCount=#{proCount},proSalePrice=#{proSalePrice},
         proPicPath=#{proPicPath},proType=#{proType}
         where proId=#{proId}
     </update>
+    <!-- 删除 -->
+    <delete id="deleteProduct" parameterType="String">
+        delete from BEProduct where proId=#{proId}
+    </delete>
  </mapper>

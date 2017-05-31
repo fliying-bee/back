@@ -12,7 +12,7 @@ public interface ProductDao {
 	//插入
 	public int insertProduct(Product product);	
 	//删除
-	public int deleteProduct(String empId);
+	public int deleteProduct(String proId);
 	//更新
 	public int updateProduct(Product product);
 }

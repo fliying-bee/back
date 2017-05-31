@@ -11,6 +11,7 @@ public class Product {
 	private String proPicPath;
 	private String draId;
 	private String proType;
+	
 	public String getProId() {
 		return proId;
 	}

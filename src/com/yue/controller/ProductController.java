@@ -18,7 +18,6 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	
 //	分页根据类型查询商品
 	@RequestMapping(value="queryProductPageByType")
 	@ResponseBody
@@ -52,7 +51,7 @@ public class ProductController {
 		
 	}
 	
-//	根据权限编码查询商品
+//	根据商品编码查询商品
 	@RequestMapping(value="queryProductById")
 	@ResponseBody
 	public JsonResult<Product> queryProductById(String proId){
@@ -69,7 +68,7 @@ public class ProductController {
 		}
 		
 	}
-//	插入权限
+//	插入商品
 	@RequestMapping(value="insertProduct")
 	@ResponseBody
 	public JsonResult<Product> insertProduct(String proId,String proName,float proBuyPrice,String proDesc,float proSalePrice,float proSellPrice,String proPicPath,String proType){
@@ -103,17 +102,12 @@ public class ProductController {
 //	修改商品
 	@RequestMapping(value="updateProduct")
 	@ResponseBody
-	public JsonResult<Product> updateProduct(String proId,String proName,float proBuyPrice,int proCount,String proDesc,float proSalePrice,float proSellPrice,String proPicPath,String proType){
-		Product product = new Product();
-		product.setProBuyPrice(proBuyPrice);
-		product.setProCount(proCount);
+	public JsonResult<Product> updateProduct(String proId,String proName,String proDesc,float proSellPrice){
+		Product product = productService.queryProductById(proId);
 		product.setProDesc(proDesc);
 		product.setProId(proId);
 		product.setProName(proName);
-		product.setProPicPath(proPicPath);
-		product.setProSalePrice(proSalePrice);
 		product.setProSellPrice(proSellPrice);
-		product.setProType(proType);
 		try{
 			int flag= productService.updateProduct(product);
 			if(flag==1){
@@ -128,6 +122,28 @@ public class ProductController {
 			e.printStackTrace();
 			return new JsonResult<Product>(e);
 		}
+	}
+//	删除权限
+	@RequestMapping(value="deleteProduct")
+	@ResponseBody
+	public JsonResult<Product> deleteProduct(String proId){
+		Product Product = new Product();
+		try{
+			int flag= productService.deleteProduct(proId);
+			if(flag==1){
+				return new JsonResult<Product>(Product);	
+			}else{
+				Product error = new Product();
+				JsonResult<Product> result = new JsonResult<Product>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Product>(e);
+		}
+		
 	}
 	
 //	修改商品库存
@@ -157,5 +173,31 @@ public class ProductController {
 		}
 		
 	}
-
+//	增加商品库存
+	@RequestMapping(value="addProductCount")
+	@ResponseBody
+	public JsonResult<Product> addProductCount(String proId, int proCount){		
+		try{
+			Product product = productService.queryProductById(proId);
+			int oldCount = product.getProCount();
+			product.setProCount(oldCount+proCount);
+			try{
+				int flag= productService.updateProduct(product);
+				if(flag==1){
+					return new JsonResult<Product>(product);	
+				}else{
+					Product error = new Product();
+					JsonResult<Product> result = new JsonResult<Product>(error);
+					result.setCode("Error");
+					return result;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				return new JsonResult<Product>(e);
+			}
+		}catch(Exception e){
+			return new JsonResult<Product>(e);
+		}
+		
+	}
 }
