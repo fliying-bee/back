@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+ <mapper namespace="com.yue.dao.ProcureDao">
+ 	<!-- 根据ID查购买单 -->
+ 	<resultMap id="queryForListMap" type="com.yue.model.ProcureOrder"> 
+ 		<id column="procureId" property="procureId" jdbcType="VARCHAR"/> 
+        <result column="procureTime" property="procureTime" jdbcType="DATE"/>  
+        <result column="procureStatus" property="procureStatus" jdbcType="VARCHAR"/>  
+        <result column="procurePriceSum" property="procurePriceSum" jdbcType="FLOAT"/>   
+        <result column="procureCount" property="procureCount" jdbcType="FLOAT"/>   
+		<collection property="factory" javaType="com.yue.model.Factory" ofType="com.yue.model.Factory"> 
+			<id column="facId" property="facId" jdbcType="VARCHAR"/> 
+			<result column="facId" property="facId" jdbcType="VARCHAR"/> 
+			<result column="facName" property="facName" jdbcType="VARCHAR"/> 
+			<result column="facAddr" property="facAddr" jdbcType="VARCHAR"/> 
+			<result column="facTel" property="facTel" jdbcType="VARCHAR"/> 
+		</collection>  
+		<collection property="employee" javaType="com.yue.model.Employee" ofType="com.yue.model.Employee"> 
+			<id column="empId" property="empId" jdbcType="VARCHAR"/> 
+			<result column="empId" property="empId" jdbcType="VARCHAR"/> 
+			<result column="empName" property="empName" jdbcType="VARCHAR"/> 
+		</collection>     
+	    <collection property="procureDetail" javaType="java.util.List" ofType="com.yue.model.ProcureDetail"> 
+            <id column="procureId" property="procureId" jdbcType="VARCHAR" /> 
+            <id column="proDetailId" property="proDetailId" jdbcType="VARCHAR" /> 
+            <result column="proDetailId" property="proDetailId" jdbcType="VARCHAR" />  
+            <result column="proId" property="proId" jdbcType="VARCHAR" />  
+            <result column="procureDetailType" property="procureDetailType" jdbcType="VARCHAR" />  
+            <result column="procureDetailCount" property="procureDetailCount" jdbcType="INTEGER" />
+            <collection property="product" javaType="com.yue.model.Product" ofType="com.yue.model.Product"> 
+	            <id column="proId" property="proId" jdbcType="VARCHAR" /> 
+	            <result column="proName" property="proName" jdbcType="VARCHAR" />  
+	            <result column="proBuyPrice" property="proBuyPrice" jdbcType="VARCHAR" />  
+	            <result column="proSalePrice" property="proSalePrice" jdbcType="FLOAT" />
+	        	<result column="proPicPath" property="proPicPath" jdbcType="VARCHAR" />	 
+	        	<result column="proSellPrice" property="proSellPrice" jdbcType="FLOAT" />
+	        	<result column="proDesc" property="proDesc" jdbcType="VARCHAR" />
+	        	<result column="proType" property="proType" jdbcType="VARCHAR" />
+	        	<result column="draId" property="draId" jdbcType="VARCHAR" />
+	        	<result column="proCount" property="proCount" jdbcType="INTEGER" />	     
+	        </collection>
+        </collection>  
+    </resultMap>  
+    <!-- 插入 -->
+    <insert id="insertProcure" parameterType="com.yue.model.Procure">
+        insert into BDProcure(procureId,procurePriceSum,empId,procureTime,procureCount,procureStatus,facId) 
+               values(#{procureId},#{procurePriceSum},#{empId},#{procureTime},#{procureStatus},#{procureCount},#{facId})
+    </insert>  
+    
+    <!-- 更新付款状态-->
+    <update id="updateProcureStatus" parameterType="Procure">
+        update BDProcure 
+        set procureStatus=#{procureStatus} 
+        where procureId=#{procureId}
+    </update> 
+   
+    <select id="queryBackProcureById" resultMap="queryForListMap" parameterType="String">  
+        SELECT  
+          u.procureId,  
+          u.procureTime,  
+          u.procureStatus,
+          u.procurePriceSum, 
+          u.procureCount,
+          a.empId,
+          a.empName,
+          c.facId,
+          c.facName,
+          c.facAddr,
+          c.facTel,
+          r.proDetailId, 
+          r.proId,  
+          r.procureDetailType,  
+          r.procureDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDProcure u  
+        JOIN BDProcureDetail r on (u.procureId = r.procureId and u.procureId=#{procureId})
+        JOIN BEProduct b on r.proId = b.proId 
+        JOIN BEEmp a on u.empId = a.empId 
+        JOIN BEFactory c on u.facId = c.facId
+    </select>  
+ 	
+   	 <!-- 分页查询所有购买单-->
+    <select id="queryBackAllProcurePage" resultMap="queryForListMap">
+        SELECT  
+ 		  u.procureId,  
+          u.procureTime,  
+          u.procureStatus,
+          u.procurePriceSum, 
+          u.procureCount,
+          a.empId,
+          a.empName,
+          c.facId,
+          c.facName,
+          c.facAddr,
+          c.facTel,
+          r.proDetailId, 
+          r.proId,  
+          r.procureDetailType,  
+          r.procureDetailCount,
+          b.proName,
+          b.proDesc,
+          b.proType,
+          b.draId,
+          b.proCount,
+          b.proBuyPrice,
+          b.proSellPrice,
+          b.proSalePrice,
+          b.proPicPath
+        FROM  
+          BDProcure u  
+        JOIN BDProcureDetail r on u.procureId = r.procureId
+        JOIN BEProduct b on r.proId = b.proId
+        JOIN BEEmp a on u.empId = a.empId 
+        JOIN BEFactory c on u.facId = c.facId
+    </select>
+ </mapper>
