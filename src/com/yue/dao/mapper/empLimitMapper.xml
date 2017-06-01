@@ -3,6 +3,12 @@
     "-//mybatis.org//DTD Mapper 3.0//EN"  
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
  <mapper namespace="com.yue.dao.EmpLimitDao">
+ <!-- 根据ID查权限 -->
+    <select id="queryAllEmpLimitById" resultType="com.yue.model.EmpLimit" parameterType="String">
+        select * 
+        from BDEmpLimit 
+        where empId = #{empId}
+    </select>
     <!-- 插入 -->
     <insert id="insertEmpLimit" parameterType="com.yue.model.EmpLimit">
         insert into BDEmpLimit(empId,limId) 
