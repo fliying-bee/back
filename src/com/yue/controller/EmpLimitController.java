@@ -1,5 +1,7 @@
 package com.yue.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +15,24 @@ import com.yue.util.JsonResult;
 public class EmpLimitController {
 	@Autowired
 	private EmpLimitService empLimitService;
-	
-	
+//	查询所有权限
+	@RequestMapping(value="queryAllEmpLimitById")
+	@ResponseBody
+	public JsonResult<List<EmpLimit>> queryAllEmpLimitById(String empId){
+		try{
+			List<EmpLimit> getLimit= empLimitService.queryAllEmpLimitById(empId);
+			
+			try{
+				return new JsonResult<List<EmpLimit>>(getLimit);
+			}catch(Exception e){
+				return new JsonResult<List<EmpLimit>>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<List<EmpLimit>>(e);
+		}
+		
+	}
 //	插入员工权限
 	@RequestMapping(value="insertEmpLimit")
 	@ResponseBody

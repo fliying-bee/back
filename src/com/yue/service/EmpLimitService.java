@@ -1,5 +1,7 @@
 package com.yue.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,9 @@ public class EmpLimitService {
 	//删除 
 	public int deleteEmpLimit(EmpLimit empLimit){
     	return empLimitdao.deleteEmpLimit(empLimit);
+    }
+	//查询所有
+	public List<EmpLimit> queryAllEmpLimitById(String empId){
+    	return empLimitdao.queryAllEmpLimitById(empId);
     }
 }
