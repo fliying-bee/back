@@ -55,7 +55,7 @@
     </resultMap>  
     <!-- 插入 -->
     <insert id="insertProcure" parameterType="com.yue.model.Procure">
-        insert into BDProcure(procureId,procurePriceSum,empId,procureTime,procureCount,procureStatus,facId) 
+        insert into BDProcure(procureId,procurePriceSum,empId,procureTime,procureStatus,procureCount,facId) 
                values(#{procureId},#{procurePriceSum},#{empId},#{procureTime},#{procureStatus},#{procureCount},#{facId})
     </insert>  
     
