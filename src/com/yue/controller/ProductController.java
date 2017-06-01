@@ -200,4 +200,21 @@ public class ProductController {
 		}
 		
 	}
+//	查询商品
+	@RequestMapping(value="queryProduct")
+	@ResponseBody
+	public JsonResult<List<Product>> queryProduct(){
+		try{
+			List<Product> getProduct= productService.queryProduct();
+			try{
+				return new JsonResult<List<Product>>(getProduct);
+			}catch(Exception e){
+				return new JsonResult<List<Product>>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<List<Product>>(e);
+		}
+		
+	}
 }

@@ -17,14 +17,17 @@ public class ProcureService {
 	public int insertProcure(Procure Procure){
     	return ProcureDao.insertProcure(Procure);
     }
-	public int updateProcure(Procure Procure){
-    	return ProcureDao.updateProcure(Procure);
+	public int updateProcure(ProcureOrder procureOrder){
+    	return ProcureDao.updateProcure(procureOrder);
     }
 	public int deleteProcure(Procure procure){
     	return ProcureDao.deleteProcure(procure);
     }
 	public ProcureOrder queryBackProcureById(String ProcureId){
     	return ProcureDao.queryBackProcureById(ProcureId);
+    }
+	public ProcureOrder queryProcureById(String ProcureId){
+    	return ProcureDao.queryProcureById(ProcureId);
     }
 	public List<ProcureOrder> queryBackAllProcurePage(){
     	return ProcureDao.queryBackAllProcurePage();

@@ -11,13 +11,15 @@ public interface ProcureDao {
 	//插入
 	public int insertProcure(Procure procure);
 	//更新
-	public int updateProcure(Procure procure);
+	public int updateProcure(ProcureOrder procureOrder);
 	//更新
 	public int updateProcureStatus(Procure procure);
 	//删除
 	public int deleteProcure(Procure procure);
 	//根据ID查
 	public ProcureOrder queryBackProcureById(String ProcureId);
+	//根据ID查
+    public ProcureOrder queryProcureById(String ProcureId);
 	//分页查询所有
 	public List<ProcureOrder> queryBackAllProcurePage();
 }

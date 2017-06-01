@@ -34,4 +34,9 @@
     <delete id="deleteProduct" parameterType="String">
         delete from BEProduct where proId=#{proId}
     </delete>
+    <!-- 查商品 -->
+    <select id="queryProduct" resultType="com.yue.model.Product">
+        select * 
+        from BEProduct 
+    </select>
  </mapper>

@@ -1,5 +1,8 @@
 package com.yue.controller;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.yue.model.Procure;
 import com.yue.model.ProcureOrder;
 import com.yue.model.Page;
+
 import com.yue.service.ProcureService;
 import com.yue.util.JsonResult;
 
@@ -19,47 +23,48 @@ public class ProcureController {
 	@Autowired
 	private ProcureService ProcureService;
 	
-////	插入
-//	@RequestMapping(value="insertProcure")
-//	@ResponseBody
-//	public JsonResult<Procure> insertProcure(String procureId,float procurePriceSum,String userId){
-//		Procure procure = new procure();
-//		procure.setProcureId(procureId);
-//		procure.setProcurePriceSum(procurePriceSum);
-//		procure.setUserId(userId);
-//		//获取当前日期
-//		Date nowTime = new Date(System.currentTimeMillis());
-//		SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd");
-//		String retStrFormatNowDate = sdFormatter.format(nowTime);
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//		try {
-//			Date procureTime = new Date(format.parse(retStrFormatNowDate).getTime());
-//			procure.setProcureOrderTime(procureTime);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		procure.setProcureStatus("notpay");
-//		
-//		try{
-//			int flag= ProcureService.insertProcure(Procure);
-//			if(flag==1){
-//				return new JsonResult<Procure>(procure);	
-//			}else{
-//				Procure error = new Procure();
-//				JsonResult<Procure> result = new JsonResult<Procure>(error);
-//				result.setCode("Error");
-//				return result;
-//			}
-//			
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			return new JsonResult<Procure>(e);
-//		}
-//		
-//	}
-//
+//	插入
+	@RequestMapping(value="insertProcure")
+	@ResponseBody
+	public JsonResult<Procure> insertProcure(String procureId,String empId,String facId){
+		Procure procure = new Procure();
+		procure.setProcureId(procureId);
+		procure.setEmpId(empId);
+		procure.setFacId(facId);
+		//获取当前日期
+		Date nowTime = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		String retStrFormatNowDate = sdFormatter.format(nowTime);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date procureTime = new Date(format.parse(retStrFormatNowDate).getTime());
+			procure.setProcureTime(procureTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		procure.setProcureStatus("notpay");
+		procure.setProcureCount(0);
+		procure.setProcurePriceSum(0);
+		try{
+			int flag= ProcureService.insertProcure(procure);
+			if(flag==1){
+				return new JsonResult<Procure>(procure);	
+			}else{
+				Procure error = new Procure();
+				JsonResult<Procure> result = new JsonResult<Procure>(error);
+				result.setCode("Error");
+				return result;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<Procure>(e);
+		}
+		
+	}
 
-	//后台分页查询所有购买单
+
+	//后台分页查询所有单
 	@RequestMapping(value="queryBackAllProcurePage")
 	@ResponseBody
 	public JsonResult<Page<ProcureOrder>> queryBackAllProcurePage(int currentPage, int pageSize){
@@ -108,6 +113,23 @@ public class ProcureController {
 		}
 		
 	}
+//	后台根据购买单编码查询购买单
+	@RequestMapping(value="queryProcureById")
+	@ResponseBody
+	public JsonResult<ProcureOrder> queryProcureById(String procureId){
+		try{
+			ProcureOrder getProcure= ProcureService.queryProcureById(procureId);
+			try{
+				return new JsonResult<ProcureOrder>(getProcure);
+			}catch(Exception e){
+				return new JsonResult<ProcureOrder>(e);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<ProcureOrder>(e);
+		}
+		
+	}
 //	修改付款状态
 	@RequestMapping(value="updateProcureStatus")
 	@ResponseBody
@@ -129,6 +151,36 @@ public class ProcureController {
 			e.printStackTrace();
 			return new JsonResult<Procure>(e);
 		}
+	}
+//	增加商品库存
+	@RequestMapping(value="addProcureCount")
+	@ResponseBody
+	public JsonResult<ProcureOrder> addProductCount(String procureId, int proCount, float proPrice){		
+		try{
+			ProcureOrder procureOrder = ProcureService.queryProcureById(procureId);
+			int oldCount = procureOrder.getProcureCount();
+			float oldPrice = procureOrder.getProcurePriceSum();
+			procureOrder.setProcureCount(oldCount+proCount);
+			procureOrder.setProcurePriceSum(oldPrice+proPrice);
+			try{
+				int flag= ProcureService.updateProcure(procureOrder);
+				if(flag==1){
+					return new JsonResult<ProcureOrder>(procureOrder);	
+				}else{
+					ProcureOrder error = new ProcureOrder();
+					JsonResult<ProcureOrder> result = new JsonResult<ProcureOrder>(error);
+					result.setCode("Error");
+					return result;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				return new JsonResult<ProcureOrder>(e);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new JsonResult<ProcureOrder>(e);
+		}
+		
 	}
 }
 

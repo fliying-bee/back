@@ -15,4 +15,6 @@ public interface ProductDao {
 	public int deleteProduct(String proId);
 	//更新
 	public int updateProduct(Product product);
+	//根据ID查询
+	public List<Product> queryProduct();
 }

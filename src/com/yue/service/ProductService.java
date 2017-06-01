@@ -33,5 +33,9 @@ public class ProductService {
   	public int updateProduct(Product product){
     	return productDao.updateProduct(product);
     }
+  //查询
+  	public List<Product> queryProduct(){
+      	return productDao.queryProduct();
+      }
    
 }
